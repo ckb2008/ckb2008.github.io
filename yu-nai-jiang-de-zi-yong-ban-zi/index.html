@@ -644,7 +644,30 @@ void solve(){
     }
     cout &lt;&lt; cnt &lt;&lt; &#39;\n&#39;;
 }
-</code></pre></div><footer class="content__footer"><div class="content__last-updated">This article was updated on <time datetime="2026-10-27T21:20">Oct 27, 2026</time></div><div class="content__share"></div></footer></div></article></main><div class="right-bar"><div class="right-bar__inner"><div class="sidebar"><section class="box authors"><h3 class="box__title">Authors</h3><ul class="authors__cotainer"><li class="authors__item"><div><a href="https://ckb2008.github.io/authors/ckbyuina/index.html" class="authors__title">ckbYuina</a> <span class="authors__meta">Post: 2</span></div></li></ul></section><div class="box copyright">Powered by Publii - Open-Source CMS for Static Websites</div></div></div></div></div><script defer="defer" src="https://ckb2008.github.io/assets/js/scripts.min.js?v&#x3D;b2d91bcadbf5db401b76eb5bb3092eb7"></script><script>var images = document.querySelectorAll('img[loading]');
+</code></pre></div><footer class="content__footer"><div class="content__last-updated">This article was updated on <time datetime="2026-10-27T21:20">Oct 27, 2026</time></div><div class="content__share"></div></footer></div></article><div class="content__section banner"><div class="main__inner"><div id="container"></div><link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"><script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+  render(state, instance) {
+    const container = document.createElement('div')
+    container.lang = "en-US"
+    container.className = 'gitment-container gitment-root-container'
+    container.appendChild(instance.renderHeader(state, instance))
+    container.appendChild(instance.renderEditor(state, instance))
+    container.appendChild(instance.renderComments(state, instance))
+    container.appendChild(instance.renderFooter(state, instance))
+    return container
+  },
+}
+    
+var gitment = new Gitment({
+  id: '页面 ID', // 可选。默认为 location.href
+  owner: 'ckb2008',
+  repo: 'ckb2008.github.io',
+  oauth: {
+    client_id: 'Ov23livhKZ4m0gsEf2VK',
+    client_secret: '70fb9618394cf5561983e450871bf9abde678324',
+  },
+  theme: myTheme,
+})
+gitment.render('container')</script></div></div></main><div class="right-bar"><div class="right-bar__inner"><div class="sidebar"><section class="box authors"><h3 class="box__title">Authors</h3><ul class="authors__cotainer"><li class="authors__item"><div><a href="https://ckb2008.github.io/authors/ckbyuina/index.html" class="authors__title">ckbYuina</a> <span class="authors__meta">Post: 2</span></div></li></ul></section><div class="box copyright">Powered by Publii - Open-Source CMS for Static Websites</div></div></div></div></div><script defer="defer" src="https://ckb2008.github.io/assets/js/scripts.min.js?v&#x3D;b2d91bcadbf5db401b76eb5bb3092eb7"></script><script>var images = document.querySelectorAll('img[loading]');
         for (var i = 0; i < images.length; i++) {
             if (images[i].complete) {
                 images[i].classList.add('is-loaded');
