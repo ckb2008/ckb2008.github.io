@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
-    <title>ckbYuina&#x27;s doghouse</title>
+    <title>芋艿酱的小窝</title>
     <link href="https://ckb2008.github.io/feed.xml" rel="self" />
     <link href="https://ckb2008.github.io" />
-    <updated>1970-01-01T08:00:00+08:00</updated>
+    <updated>2026-10-27T13:08:51+08:00</updated>
     <author>
         <name>ckbYuina</name>
     </author>
     <id>https://ckb2008.github.io</id>
 
+    <entry>
+        <title>Hello Publii</title>
+        <author>
+            <name>ckbYuina</name>
+        </author>
+        <link href="https://ckb2008.github.io/hello-publii/index.html"/>
+        <id>https://ckb2008.github.io/hello-publii/index.html</id>
+
+        <updated>2026-10-27T13:08:51+08:00</updated>
+            <summary type="html">
+                <![CDATA[
+                    Hello~ OvO
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <p>Hello~ OvO</p>
+            ]]>
+        </content>
+    </entry>
 </feed>

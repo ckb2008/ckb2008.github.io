@@ -1,13 +1,28 @@
 {
     "version": "https://jsonfeed.org/version/1",
-    "title": "ckbYuina&#x27;s doghouse",
+    "title": "芋艿酱的小窝",
     "description": "",
     "home_page_url": "https://ckb2008.github.io",
     "feed_url": "https://ckb2008.github.io/feed.json",
     "user_comment": "",
+    "icon": "https://ckb2008.github.io/media/website/avatar.png",
     "author": {
         "name": "ckbYuina"
     },
     "items": [
+        {
+            "id": "https://ckb2008.github.io/hello-publii/index.html",
+            "url": "https://ckb2008.github.io/hello-publii/index.html",
+            "title": "Hello Publii",
+            "summary": "Hello~ OvO",
+            "content_html": "<p>Hello~ OvO</p>",
+            "author": {
+                "name": "ckbYuina"
+            },
+            "tags": [
+            ],
+            "date_published": "2026-10-27T13:08:51+08:00",
+            "date_modified": "2026-10-27T13:08:51+08:00"
+        }
     ]
 }
