@@ -3,7 +3,7 @@
     <title>芋艿酱的小窝</title>
     <link href="https://ckb2008.github.io/feed.xml" rel="self" />
     <link href="https://ckb2008.github.io" />
-    <updated>2026-10-28T23:04:43+08:00</updated>
+    <updated>2026-10-28T23:07:06+08:00</updated>
     <author>
         <name>ckbYuina</name>
     </author>
@@ -98,7 +98,8 @@ int main() {
 }
 </code></pre>
 <h2 id="d">D</h2>
-<p>给定两个长度均为 <code>n</code> 的序列 <code>a</code> 和 <code>b</code>，要求构造一个序列 <code>w</code>，其中 $ 1 \le w_i \le 10^{18} $，使得 $ \sum_{i = 1}^{n} w_i(a_i - b_i) \geq 0 $。</p><h2 id="e">E</h2>
+<p>给定两个长度均为 <code>n</code> 的序列 <code>a</code> 和 <code>b</code>，要求构造一个序列 <code>w</code>，其中 $ 1 \le w_i \le 10^{18} $，使得 $ \sum_{i = 1}^{n} w_i(a_i - b_i) \geq 0 $。
+构造题，思路就是尽量让 $a_i - b_i$ 为负的时候的系数小，非负的时候的系数大。那么简单一点，直接令前者权值为 $1$，后者为 $10^{18}$ 即可。</p><h2 id="e">E</h2>
 <p><del>我会补的！</del></p><h2 id="f">F</h2>
 <p>挖坑待填</p>
             ]]>
