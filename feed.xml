@@ -3,12 +3,107 @@
     <title>芋艿酱的小窝</title>
     <link href="https://ckb2008.github.io/feed.xml" rel="self" />
     <link href="https://ckb2008.github.io" />
-    <updated>2026-10-27T21:20:55+08:00</updated>
+    <updated>2026-10-28T23:04:43+08:00</updated>
     <author>
         <name>ckbYuina</name>
     </author>
     <id>https://ckb2008.github.io</id>
 
+    <entry>
+        <title>ABC474 A-F</title>
+        <author>
+            <name>ckbYuina</name>
+        </author>
+        <link href="https://ckb2008.github.io/abc474-a-f/"/>
+        <id>https://ckb2008.github.io/abc474-a-f/</id>
+        <media:content url="https://ckb2008.github.io/media/posts/3/atcoder-logo.png" medium="image" />
+            <category term="Virtural Participation"/>
+            <category term="Atcoder Beginer Contest"/>
+
+        <updated>2026-10-28T02:35:13+08:00</updated>
+            <summary type="html">
+                <![CDATA[
+                        <img src="https://ckb2008.github.io/media/posts/3/atcoder-logo.png" alt="" />
+                    试试 dsh 的 studymate 插件给我安排的 vp 任务 入门题，不解释 提交文件的时候忘记保存了，结果交了份空的代码上去，喜提罚时 +5 int main()&hellip;
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                    <p><img src="https://ckb2008.github.io/media/posts/3/atcoder-logo.png" class="type:primaryImage" alt="" /></p>
+                <p>试试 dsh 的 studymate 插件给我安排的 vp 任务</p><h2 id="a">A</h2>
+<p>入门题，不解释</p><blockquote>
+<p>提交文件的时候忘记保存了，结果交了份空的代码上去，喜提罚时 +5</p></blockquote>
+<pre><code class="language-cpp">int main() {
+    int x = read();
+    for (int i = 1; i &lt;= 3; ++i) {
+        if (i != x) {
+            print(i);
+            return 0;
+        }
+    }    
+    
+    return 0;
+}
+</code></pre>
+<h2 id="b">B</h2>
+<p>题意：给定一个长度为 <code>n</code> 序列，每隔十位做一个分组，第 <code>i</code> 组内的数必须完整覆盖 <code>[(i - 1) * 10 + 1, min(i * 10, n)]</code> 内的所有数，如果不满足，输出 <code>No</code>；否则输出 <code>Yes</code>。</p><p>直接模拟即可。有个小技巧：把 n 补齐成 10 的倍数，然后扫描第 <code>i</code> 组组内的数的时候直接判断是否在 <code>[(i - 1) * 10 + 1, i * 10]</code> 的范围内即可。</p><pre><code class="language-cpp">constexpr int N = 107;
+
+int n, a[N];
+
+int main() {
+    read(n);
+    for (int i = 1; i &lt;= n; ++i) read(a[i]);
+
+    if (n % 10) {
+        while (n % 10) a[++n] = n;
+    }
+
+    for (int i = 1; i &lt;= n / 10; ++i) {
+        int l = (i - 1) * 10, r = i * 10;
+        for (int j = (i - 1) * 10 + 1; j &lt;= i * 10; ++j) {
+            if (a[j] &lt; l || a[j] &gt; r) {
+                puts(&quot;No&quot;);
+                return 0;
+            }
+        }
+    }
+
+    puts(&quot;Yes&quot;);
+    
+    return 0;
+}
+</code></pre>
+<h2 id="c">C</h2>
+<p>题意：给定一个长度为 <code>n</code> 的排列和 <code>q</code> 次询问，每次询问把排列中值为 <code>a[i]</code> 的数移动到末尾。</p><p>用一个数组 <code>b</code> 记录值为 <code>val</code> 的数的下标。每次询问的时候，用一个 <code>cnt</code> 变量，<code>cnt</code> 每次增加 1，然后把 <code>b[val]</code> 赋值为 <code>cnt</code>。最后对序列进行排序即可，每次比较权值的大小为 <code>b</code> 中的值。实现上可以传入一个 lambda 函数作为 cmp 的参数。</p><pre><code class="language-cpp">constexpr int N = 2e5 + 7;
+
+int n, q, a[N], b[N], id[N], idd[N];
+
+int main() {
+    read(n, q);
+    for (int i = 1; i &lt;= n; ++i) read(a[i]), id[a[i]] = i;
+    int pos = n;
+    for (int i = 1; i &lt;= q; ++i) {
+        read(b[i]);
+        id[b[i]] = ++pos;
+    }
+
+    for (int i = 1; i &lt;= n; ++i) idd[i] = i;
+    sort(idd + 1, idd + n + 1, [&amp;](int x, int y) {
+        return id[x] &lt; id[y];
+    });
+
+    for (int i = 1; i &lt;= n; ++i) print(idd[i]), putc(&#39; &#39;);
+    
+    return 0;
+}
+</code></pre>
+<h2 id="d">D</h2>
+<p>给定两个长度均为 <code>n</code> 的序列 <code>a</code> 和 <code>b</code>，要求构造一个序列 <code>w</code>，其中 $ 1 \le w_i \le 10^{18} $，使得 $ \sum_{i = 1}^{n} w_i(a_i - b_i) \geq 0 $。</p><h2 id="e">E</h2>
+<p><del>我会补的！</del></p><h2 id="f">F</h2>
+<p>挖坑待填</p>
+            ]]>
+        </content>
+    </entry>
     <entry>
         <title>芋艿酱的自用板子</title>
         <author>
