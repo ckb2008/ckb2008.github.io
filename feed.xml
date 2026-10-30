@@ -3,12 +3,69 @@
     <title>芋艿酱的小窝</title>
     <link href="https://ckb2008.github.io/feed.xml" rel="self" />
     <link href="https://ckb2008.github.io" />
-    <updated>2026-10-28T23:22:52+08:00</updated>
+    <updated>2026-10-30T20:55:02+08:00</updated>
     <author>
         <name>ckbYuina</name>
     </author>
     <id>https://ckb2008.github.io</id>
 
+    <entry>
+        <title>牛客小白月赛 139 A-D</title>
+        <author>
+            <name>ckbYuina</name>
+        </author>
+        <link href="https://ckb2008.github.io/niu-ke-xiao-bai-yue-sai-139-a-d/"/>
+        <id>https://ckb2008.github.io/niu-ke-xiao-bai-yue-sai-139-a-d/</id>
+            <category term="Nowcoder Newbie Contest"/>
+
+        <updated>2026-10-30T20:55:02+08:00</updated>
+            <summary type="html">
+                <![CDATA[
+                    A 直接统计两个字符串中所有 1 和 0 的数量即可。 注意到：若 $a_i &gt; a_j$，那么 $\min(a_i, a_j)&hellip;
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <h2 id="a">A</h2>
+<p>直接统计两个字符串中所有 1 和 0 的数量即可。</p><h2 id="b">B</h2>
+<p>注意到：若 $a_i &gt; a_j$，那么 $\min(a_i, a_j) + \max(0, a_j - a_i) = a_j$。若 $a_i \leq a_j$，那么 $\min(a_i, a_j) + \max(0, a_j - a_i) = a_j$。所以括号里面的式子在任何情况下都恒为 $a_j$。</p><p>因此</p><p>$$
+\sum_{i=1}^n \sum_{j = i}^n (\min(a_i, a_j) + \max(0, a_j - a_i)) = \sum_{i = 1}^n \sum_{j = i}^n a_j = \sum_{i = 1}^n i \cdot a_i
+$$</p><p>直接求和即可</p><h2 id="c">C</h2>
+<p>设 $k_i$表示前 i 轮比赛中改变结果的次数。那么，$a_i - b_i \leq x$ 等价于 $k_i \geq \max(0, \frac{i - x}2)$，而最终小芳能赢等价于 $k_n \leq \lfloor\frac{n -  1}2\rfloor$。</p><p>实现的时候，我们用一个小根堆维护当前可以修改结果的比赛，其中堆顶是最小修改的代价。每次先插入当前修改的代价。然后，如果 $k_i$ 不满足条件，那就弹出堆顶，并累加代价。最后，如果 $k_n &gt; \lfloor\frac{n - 1}2\rfloor$，就输出 -1；否则，输出累加代价之和。</p><pre><code class="language-cpp">priority_queue&lt;int&gt; q;
+int k = 0; ll ans = 0;
+for (int i = 1; i &lt;= n; ++i) {
+    q.push(-c[i]);
+    if (k &lt; max(0, (i - x + 1) / 2)) {
+        ++k;
+        ans += q.top();
+        q.pop();
+    }
+}
+if (k &lt;= (n - 1) / 2) print(-ans); else print(-1);
+</code></pre>
+<h2 id="d">D</h2>
+<p>我们设 $a_k$表示第 k 层纸牌屋需要的纸牌数。不难得到，$a_i = \frac{3i(i + 1)}2$。所以所有合法的 i 的规模是 $O(\sqrt{n})$ 量级的。</p><p>这个时候，我们去枚举区间的右端点，而区间长度已知，区间的和可以通过预处理前缀和在 $O(1)$ 的时间下算出来，计算答案的时候取 max 即可。整体算法是 $O(n\sqrt{n})$ 的，可以通过。</p><blockquote>
+<p>注意到，本题中 $a_i$的范围是 $[-10^9, 10^9]$，所以初始化 ans 的时候要设置成负无穷大。</p></blockquote>
+<pre><code class="language-cpp">constexpr int N = 2e5 + 7;
+constexpr ll inf = 1e18;
+
+int n, a[N];
+
+void solve() {
+    read(n);
+    for (int i = 1; i &lt;= n; ++i) a[i] = a[i - 1] + read();    
+    int ans = -inf;
+    for (int i = 1; 1ll * i * (i + 1) / 2 * 3 &lt;= n; ++i) {
+        int k = 1ll * i * (i + 1) / 2 * 3;
+        for (int j = k; j &lt;= n; ++j) ans = max(ans, a[j] - a[j - k]);
+    }
+    print(ans), putc(&#39;\n&#39;);
+}
+</code></pre>
+
+            ]]>
+        </content>
+    </entry>
     <entry>
         <title>ABC474 A-F</title>
         <author>

@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="en-gb"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>牛客小白月赛 139 A-D - 芋艿酱的小窝</title><meta name="description" content="A 直接统计两个字符串中所有 1 和 0 的数量即可。 注意到：若 $a_i &amp;gt; a_j$，那么 $\min(a_i, a_j)&amp;hellip;"><meta name="generator" content="Publii Open-Source CMS for Static Site"><link rel="stylesheet" href="https://ckb2008.github.io/media/plugins/syntaxHighlighter/prism-black.css"><link rel="stylesheet" href="https://ckb2008.github.io/media/plugins/syntaxHighlighter/prism-inline-color.css"><link rel="canonical" href="https://ckb2008.github.io/niu-ke-xiao-bai-yue-sai-139-a-d/"><link rel="alternate" type="application/atom+xml" href="https://ckb2008.github.io/feed.xml" title="芋艿酱的小窝 - RSS"><link rel="alternate" type="application/json" href="https://ckb2008.github.io/feed.json" title="芋艿酱的小窝 - JSON"><link rel="shortcut icon" href="https://ckb2008.github.io/media/website/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="https://ckb2008.github.io/assets/css/style.css?v&#x3D;e0b0a2318d3e40fbb97f0449bb594550"><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://ckb2008.github.io/niu-ke-xiao-bai-yue-sai-139-a-d/"},"headline":"牛客小白月赛 139 A-D","datePublished":"2026-10-30T20:55+08:00","dateModified":"2026-10-30T20:55+08:00","image":{"@type":"ImageObject","url":"https://ckb2008.github.io/media/website/avatar.png","height":174,"width":174},"description":"A 直接统计两个字符串中所有 1 和 0 的数量即可。 注意到：若 $a_i &gt; a_j$，那么 $\\min(a_i, a_j)&hellip;","author":{"@type":"Person","name":"ckbYuina","url":"https://ckb2008.github.io/authors/ckbyuina/"},"publisher":{"@type":"Organization","name":"ckbYuina","logo":{"@type":"ImageObject","url":"https://ckb2008.github.io/media/website/avatar.png","height":174,"width":174}}}</script><noscript><style>img[loading] {
+                    opacity: 1;
+                }</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css"><script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js"></script><script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js"></script><script>document.addEventListener("DOMContentLoaded", function() {
+    if (typeof renderMathInElement === "function") {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\[", right: "\\]", display: true},
+                {left: "\\(", right: "\\)", display: false},
+                {left: "$", right: "$", display: false}
+            ],
+            throwOnError: false,
+            strict: "ignore",
+            ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+        });
+    }
+});</script></head><body class="post-template"><div class="container"><div class="left-bar"><div class="left-bar__inner"><header class="header"><a class="logo" href="https://ckb2008.github.io/"><img src="https://ckb2008.github.io/media/website/avatar.png" alt="芋艿酱的小窝" width="174" height="174"></a><nav class="navbar"><button class="navbar__toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><span class="navbar__toggle__box"><span class="navbar__toggle__inner">Menu</span></span></button><ul class="navbar__menu"><li><a href="https://ckb2008.github.io/tags/" target="_blank" rel="/tags/" aria-label="Tags"><span>Tags</span></a></li></ul></nav><a class="logo logo--atbottom" href="https://ckb2008.github.io/">芋艿酱的小窝</a></header></div></div><main class="main post"><article class="content"><div class="content__meta content__meta--attop"><div class="content__meta--attop__inner"><div class="content__maintag"><svg width="20" height="20" aria-hidden="true" focusable="false"><use xlink:href="https://ckb2008.github.io/assets/svg/svg-map.svg#tag"/></svg> Published in <a href="https://ckb2008.github.io/tags/nowcoder-newbie-contest/" class="metadata__maintag">Nowcoder Newbie Contest</a> <span class="reading-time" aria-label="2 min read">2 min read</span></div></div></div><div class="main__inner"><div class="content__meta"><div class="content__author"><div><a href="https://ckb2008.github.io/authors/ckbyuina/" class="content__author__name">ckbYuina</a><p>An ACMer from DHU</p></div></div><div class="content__date"><time datetime="2026-10-30T20:55">Oct 30, 2026</time></div></div><header class="content__header"><h1 class="content__title">牛客小白月赛 139 A-D</h1></header><div class="content__entry"><h2 id="a">A</h2><p>直接统计两个字符串中所有 1 和 0 的数量即可。</p><h2 id="b">B</h2><p>注意到：若 $a_i &gt; a_j$，那么 $\min(a_i, a_j) + \max(0, a_j - a_i) = a_j$。若 $a_i \leq a_j$，那么 $\min(a_i, a_j) + \max(0, a_j - a_i) = a_j$。所以括号里面的式子在任何情况下都恒为 $a_j$。</p><p>因此</p><p>$$ \sum_{i=1}^n \sum_{j = i}^n (\min(a_i, a_j) + \max(0, a_j - a_i)) = \sum_{i = 1}^n \sum_{j = i}^n a_j = \sum_{i = 1}^n i \cdot a_i $$</p><p>直接求和即可</p><h2 id="c">C</h2><p>设 $k_i$表示前 i 轮比赛中改变结果的次数。那么，$a_i - b_i \leq x$ 等价于 $k_i \geq \max(0, \frac{i - x}2)$，而最终小芳能赢等价于 $k_n \leq \lfloor\frac{n - 1}2\rfloor$。</p><p>实现的时候，我们用一个小根堆维护当前可以修改结果的比赛，其中堆顶是最小修改的代价。每次先插入当前修改的代价。然后，如果 $k_i$ 不满足条件，那就弹出堆顶，并累加代价。最后，如果 $k_n &gt; \lfloor\frac{n - 1}2\rfloor$，就输出 -1；否则，输出累加代价之和。</p><pre><code class="language-cpp">priority_queue&lt;int&gt; q;
+int k = 0; ll ans = 0;
+for (int i = 1; i &lt;= n; ++i) {
+    q.push(-c[i]);
+    if (k &lt; max(0, (i - x + 1) / 2)) {
+        ++k;
+        ans += q.top();
+        q.pop();
+    }
+}
+if (k &lt;= (n - 1) / 2) print(-ans); else print(-1);
+</code></pre><h2 id="d">D</h2><p>我们设 $a_k$表示第 k 层纸牌屋需要的纸牌数。不难得到，$a_i = \frac{3i(i + 1)}2$。所以所有合法的 i 的规模是 $O(\sqrt{n})$ 量级的。</p><p>这个时候，我们去枚举区间的右端点，而区间长度已知，区间的和可以通过预处理前缀和在 $O(1)$ 的时间下算出来，计算答案的时候取 max 即可。整体算法是 $O(n\sqrt{n})$ 的，可以通过。</p><blockquote><p>注意到，本题中 $a_i$的范围是 $[-10^9, 10^9]$，所以初始化 ans 的时候要设置成负无穷大。</p></blockquote><pre><code class="language-cpp">constexpr int N = 2e5 + 7;
+constexpr ll inf = 1e18;
+
+int n, a[N];
+
+void solve() {
+    read(n);
+    for (int i = 1; i &lt;= n; ++i) a[i] = a[i - 1] + read();    
+    int ans = -inf;
+    for (int i = 1; 1ll * i * (i + 1) / 2 * 3 &lt;= n; ++i) {
+        int k = 1ll * i * (i + 1) / 2 * 3;
+        for (int j = k; j &lt;= n; ++j) ans = max(ans, a[j] - a[j - k]);
+    }
+    print(ans), putc(&#39;\n&#39;);
+}
+</code></pre></div><footer class="content__footer"><div class="content__last-updated">This article was updated on <time datetime="2026-10-30T20:55">Oct 30, 2026</time></div><div class="content__share"></div></footer></div></article><div class="content__section banner"><div class="main__inner"><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/gh/ckb2008/ckb2008/gitalk-math.js?v=2.3.0"></script><div id="gitalk-container"></div><script>GitalkMath.init({
+  version: '0.16.9',                     // KaTeX 版本
+  cdn: 'https://cdn.jsdelivr.net/npm/katex@',  // 自定义 CDN 前缀
+  mhchem: false,                         // 是否加载 mhchem（\ce{} 化学式）
+  delimiters: [                          // 自定义分隔符
+    { left: '$$', right: '$$', display: true },
+    { left: '$',  right: '$',  display: true }
+  ],
+  katexOptions: { throwOnError: false, strict: 'ignore', macros: { '\\RR': '\\mathbb{R}' } },
+  selectors: ['.gt-comment-body', '.markdown-body', '.gt-header-preview']
+});
+GitalkMath.renderAll();   // 手动全量重扫（例如你自己动态插入了评论）
+    
+var gitalk = new Gitalk({
+    clientID: 'd927a9f993419d7b9658',
+    clientSecret: 'd02ea265a0180620ce2c10313744af84b38a238a',
+    repo: 'ckb2008.github.io',
+    owner: 'ckb2008',
+    admin:  ['ckb2008'],
+    id: location.pathname,      // Ensure uniqueness and len
+    distractionFreeMode: false  // Facebook-like distraction
+})
+gitalk.render('gitalk-container')</script></div></div></main><div class="right-bar"><div class="right-bar__inner"><div class="sidebar"><section class="box toc" id="toc-sidebar"><h3 class="box__title">文章目录</h3><nav class="toc__nav" id="toc-content"></nav></section><section class="box authors"><h3 class="box__title">Authors</h3><ul class="authors__cotainer"><li class="authors__item"><div><a href="https://ckb2008.github.io/authors/ckbyuina/" class="authors__title">ckbYuina</a> <span class="authors__meta">Post: 4</span></div></li></ul></section><section class="box tags"><h3 class="box__title">Recommended Topics</h3><ul class="tags__list"><li class="tags__item"><a href="https://ckb2008.github.io/tags/atcoder-beginer-contest/" class="btn btn--gray">Atcoder Beginer Contest <sup>(1)</sup></a></li><li class="tags__item"><a href="https://ckb2008.github.io/tags/nowcoder-newbie-contest/" class="btn btn--gray">Nowcoder Newbie Contest <sup>(1)</sup></a></li><li class="tags__item"><a href="https://ckb2008.github.io/tags/virtural-participation/" class="btn btn--gray">Virtural Participation <sup>(1)</sup></a></li></ul></section><div class="box copyright">Powered by Publii - Open-Source CMS for Static Websites</div></div></div></div></div><script defer="defer" src="https://ckb2008.github.io/assets/js/scripts.min.js?v&#x3D;b2d91bcadbf5db401b76eb5bb3092eb7"></script><script>var images = document.querySelectorAll('img[loading]');
+        for (var i = 0; i < images.length; i++) {
+            if (images[i].complete) {
+                images[i].classList.add('is-loaded');
+            } else {
+                images[i].addEventListener('load', function () {
+                    this.classList.add('is-loaded');
+                }, false);
+            }
+        }</script><script>(function() {
+      var container = document.getElementById('toc-content');
+      if (!container) return;
+      var entry = document.querySelector('.content__entry');
+      if (!entry) return;
+
+      var headings = entry.querySelectorAll('h2, h3, h4');
+      if (headings.length === 0) {
+         container.parentNode.style.display = 'none';
+         return;
+      }
+
+      headings.forEach(function(h, i) {
+         if (!h.id) h.id = 'toc-h' + i;
+         h.classList.add('toc-heading');
+      });
+
+      var rootList = document.createElement('ul');
+      rootList.className = 'toc__list toc__list--root';
+      var currentLevel = 2;
+      var currentParent = rootList;
+
+      headings.forEach(function(h) {
+         var level = parseInt(h.tagName.charAt(1), 10);
+         var li = document.createElement('li');
+         li.className = 'toc__item toc__item--' + level;
+         var a = document.createElement('a');
+         a.href = '#' + h.id;
+         a.className = 'toc__link';
+         a.textContent = h.textContent.trim();
+         li.appendChild(a);
+
+         if (level > currentLevel) {
+            var ul = document.createElement('ul');
+            ul.className = 'toc__list';
+            ul.style.display = 'none';
+            currentParent.lastChild.appendChild(ul);
+            currentParent = ul;
+         } else if (level < currentLevel) {
+            while (currentParent !== rootList && currentParent.parentNode.parentNode.className.indexOf('toc__item--' + level) === -1) {
+               currentParent = currentParent.parentNode.parentNode;
+            }
+         }
+
+         currentParent.appendChild(li);
+         currentLevel = level;
+      });
+
+      container.appendChild(rootList);
+
+      // Toggle nested lists
+      container.querySelectorAll('ul.toc__list ul').forEach(function(ul) {
+         var parentLink = ul.parentNode.querySelector(':scope > .toc__link');
+         if (parentLink) {
+            parentLink.classList.add('toc__link--toggle');
+            parentLink.addEventListener('click', function(e) {
+               e.preventDefault();
+               var isHidden = ul.style.display === 'none';
+               ul.style.display = isHidden ? '' : 'none';
+               parentLink.classList.toggle('toc__link--expanded', isHidden);
+            });
+         }
+      });
+
+      // Smooth scroll on click
+      container.querySelectorAll('a.toc__link').forEach(function(a) {
+         a.addEventListener('click', function(e) {
+            e.preventDefault();
+            var target = document.getElementById(a.getAttribute('href').slice(1));
+            if (target) {
+               target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+               history.replaceState(null, '', a.getAttribute('href'));
+            }
+         });
+      });
+   })();</script><script>(function() {
+			var originalTitle = document.title;
+			var timeout;
+			document.addEventListener("visibilitychange", function() {
+				if (document.hidden) {
+					document.title = "👀 We miss you! Come back!";
+				} else {
+					clearTimeout(timeout);
+					document.title = "🎉 Welcome back!";
+							setTimeout(function() {
+								document.title = originalTitle;
+							}, 2000);
+				}
+			});
+		})();</script><script src="https://ckb2008.github.io/media/plugins/pagePrefetching/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+					quicklink.listen({
+						prerender: false,
+						el: document.querySelector('body'),
+						delay: 0,
+						limit: Infinity,
+						throttle: Infinity,
+						timeout: 2000
+					});
+				});</script><script defer="defer" src="https://ckb2008.github.io/media/plugins/syntaxHighlighter/prism.js"></script><script defer="defer" src="https://ckb2008.github.io/media/plugins/syntaxHighlighter/prism-line-numbers.min.js"></script><script defer="defer" src="https://ckb2008.github.io/media/plugins/syntaxHighlighter/clipboard.min.js"></script><script defer="defer" src="https://ckb2008.github.io/media/plugins/syntaxHighlighter/prism-copy-to-clipboard.min.js"></script><script defer="defer" src="https://ckb2008.github.io/media/plugins/syntaxHighlighter/prism-inline-color.min.js"></script><script defer="defer" src="https://ckb2008.github.io/media/plugins/syntaxHighlighter/prism-autolinker.min.js"></script></body></html>
