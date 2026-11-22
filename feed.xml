@@ -3,7 +3,7 @@
     <title>芋艿酱的小窝</title>
     <link href="https://ckb2008.github.io/feed.xml" rel="self" />
     <link href="https://ckb2008.github.io" />
-    <updated>2026-11-23T02:52:07+08:00</updated>
+    <updated>2026-11-23T02:54:12+08:00</updated>
     <author>
         <name>ckbYuina</name>
     </author>
@@ -16,6 +16,9 @@
         </author>
         <link href="https://ckb2008.github.io/yu-nai-jiang-de-acm-ban-zi/"/>
         <id>https://ckb2008.github.io/yu-nai-jiang-de-acm-ban-zi/</id>
+            <category term="Template Code"/>
+            <category term="ICPC"/>
+            <category term="ACM"/>
 
         <updated>2026-11-23T02:52:07+08:00</updated>
             <summary type="html">
@@ -26,7 +29,7 @@
         <content type="html">
             <![CDATA[
                 <blockquote>
-<p>老模板已经过时，现在是新模板时代~</p></blockquote>
+<p><a href="https://ckb2008.github.io/yu-nai-jiang-de-zi-yong-ban-zi/">老模板</a>已经过时，现在是新模板时代~</p></blockquote>
 <h1 id="文件模板">文件模板</h1>
 <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
