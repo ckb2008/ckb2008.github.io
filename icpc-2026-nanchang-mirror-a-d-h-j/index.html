@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en-gb"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ICPC 2026 Nanchang Mirror A-D H J - 芋艿酱的小窝</title><meta name="description" content="link 没什么好说的，签到题。 待补 赛时想半天没想出来，@free_fail 大手子倍增 dp 过了 唉，菜就还得多练 用 $f_{i, j, len}$&amp;hellip;"><meta name="generator" content="Publii Open-Source CMS for Static Site"><link rel="stylesheet" href="https://ckb2008.github.io/media/plugins/syntaxHighlighter/prism-black.css"><link rel="stylesheet" href="https://ckb2008.github.io/media/plugins/syntaxHighlighter/prism-inline-color.css"><link rel="canonical" href="https://ckb2008.github.io/icpc-2026-nanchang-mirror-a-d-h-j/"><link rel="alternate" type="application/atom+xml" href="https://ckb2008.github.io/feed.xml" title="芋艿酱的小窝 - RSS"><link rel="alternate" type="application/json" href="https://ckb2008.github.io/feed.json" title="芋艿酱的小窝 - JSON"><link rel="shortcut icon" href="https://ckb2008.github.io/media/website/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="https://ckb2008.github.io/assets/css/style.css?v&#x3D;3cb9f7c833041bf6cb1875fa5d982758"><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://ckb2008.github.io/icpc-2026-nanchang-mirror-a-d-h-j/"},"headline":"ICPC 2026 Nanchang Mirror A-D H J","datePublished":"2026-11-20T01:37+08:00","dateModified":"2026-11-20T01:41+08:00","image":{"@type":"ImageObject","url":"https://ckb2008.github.io/media/website/avatar.png","height":174,"width":174},"description":"link 没什么好说的，签到题。 待补 赛时想半天没想出来，@free_fail 大手子倍增 dp 过了 唉，菜就还得多练 用 $f_{i, j, len}$&hellip;","author":{"@type":"Person","name":"ckbYuina","url":"https://ckb2008.github.io/authors/ckbyuina/"},"publisher":{"@type":"Organization","name":"ckbYuina","logo":{"@type":"ImageObject","url":"https://ckb2008.github.io/media/website/avatar.png","height":174,"width":174}}}</script><noscript><style>img[loading] {
+<!DOCTYPE html><html lang="en-gb"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ICPC 2026 Nanchang Mirror A-D H J - 芋艿酱的小窝</title><meta name="description" content="link 没什么好说的，签到题。 待补 赛时想半天没想出来，@free_fail 大手子倍增 dp 过了 唉，菜就还得多练 用 $f_{i, j, len}$&amp;hellip;"><meta name="generator" content="Publii Open-Source CMS for Static Site"><link rel="stylesheet" href="https://ckb2008.github.io/media/plugins/syntaxHighlighter/prism-black.css"><link rel="stylesheet" href="https://ckb2008.github.io/media/plugins/syntaxHighlighter/prism-inline-color.css"><link rel="canonical" href="https://ckb2008.github.io/icpc-2026-nanchang-mirror-a-d-h-j/"><link rel="alternate" type="application/atom+xml" href="https://ckb2008.github.io/feed.xml" title="芋艿酱的小窝 - RSS"><link rel="alternate" type="application/json" href="https://ckb2008.github.io/feed.json" title="芋艿酱的小窝 - JSON"><link rel="shortcut icon" href="https://ckb2008.github.io/media/website/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="https://ckb2008.github.io/assets/css/style.css?v&#x3D;3cb9f7c833041bf6cb1875fa5d982758"><script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://ckb2008.github.io/icpc-2026-nanchang-mirror-a-d-h-j/"},"headline":"ICPC 2026 Nanchang Mirror A-D H J","datePublished":"2026-11-20T01:37+08:00","dateModified":"2026-11-22T17:12+08:00","image":{"@type":"ImageObject","url":"https://ckb2008.github.io/media/website/avatar.png","height":174,"width":174},"description":"link 没什么好说的，签到题。 待补 赛时想半天没想出来，@free_fail 大手子倍增 dp 过了 唉，菜就还得多练 用 $f_{i, j, len}$&hellip;","author":{"@type":"Person","name":"ckbYuina","url":"https://ckb2008.github.io/authors/ckbyuina/"},"publisher":{"@type":"Organization","name":"ckbYuina","logo":{"@type":"ImageObject","url":"https://ckb2008.github.io/media/website/avatar.png","height":174,"width":174}}}</script><noscript><style>img[loading] {
                     opacity: 1;
                 }</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css"><script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js"></script><script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js"></script><script>document.addEventListener("DOMContentLoaded", function() {
     if (typeof renderMathInElement === "function") {
@@ -14,7 +14,185 @@
             ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
         });
     }
-});</script></head><body class="post-template"><div class="container"><div class="left-bar"><div class="left-bar__inner"><header class="header"><a class="logo" href="https://ckb2008.github.io/"><img src="https://ckb2008.github.io/media/website/avatar.png" alt="芋艿酱的小窝" width="174" height="174"></a><nav class="navbar"><button class="navbar__toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><span class="navbar__toggle__box"><span class="navbar__toggle__inner">Menu</span></span></button><ul class="navbar__menu"><li><a href="https://ckb2008.github.io/tags/" target="_blank" rel="/tags/" aria-label="Tags"><span>Tags</span></a></li></ul></nav><a class="logo logo--atbottom" href="https://ckb2008.github.io/">芋艿酱的小窝</a></header></div></div><main class="main post"><article class="content"><div class="content__meta content__meta--attop"><div class="content__meta--attop__inner"><div class="content__maintag"><svg width="20" height="20" aria-hidden="true" focusable="false"><use xlink:href="https://ckb2008.github.io/assets/svg/svg-map.svg#tag"/></svg> Published in <a href="https://ckb2008.github.io/tags/icpc/" class="metadata__maintag">ICPC</a> <span class="reading-time" aria-label="7 min read">7 min read</span></div></div></div><div class="main__inner"><div class="content__meta"><div class="content__author"><div><a href="https://ckb2008.github.io/authors/ckbyuina/" class="content__author__name">ckbYuina</a><p>An ACMer from DHU</p></div></div><div class="content__date"><time datetime="2026-11-20T01:37">Nov 20, 2026</time></div></div><header class="content__header"><h1 class="content__title">ICPC 2026 Nanchang Mirror A-D H J</h1></header><div class="content__entry"><p><a href="https://www.luogu.com.cn/contest/372198">link</a></p><h2 id="a">A</h2><p>没什么好说的，签到题。</p><h2 id="b">B</h2><p>待补</p><h2 id="c">C</h2><p>赛时想半天没想出来，@free_fail 大手子倍增 dp 过了 唉，菜就还得多练 用 $f_{i, j, len}$ 表示从 $i$ 到 $j$ 能够 $2^k$ 步所需要的最小天数，则有转移：</p><p>$$ f_{i, j, len} = \min\limits_{i = 1}^n {f_{i, j, len}, max(f_{i, k, len - 1}, f_{k, j, len - 1})} $$</p><p>后面那个式子要取 max，因为要保证两部分都能达到 $2^{len - 1}$ 步数。转移的时候枚举顺序类似 Floyd 最短路，先 k 然后 i 和 j 的顺序。 然后对于询问，由于 w 是定死的，对 w 二进制拆分，然后预处理答案，直接输出即可。 赛时实测把 len 那一维放在最低位会 T，大概是因为内存访问不连续。后面进行了缓存优化，把 len 放到最高位就过了。 赛后重新写了一版代码。</p><h2 id="j">J</h2><p>@free_fail 提出可以 $O(n \sqrt n)$ 建图，具体是：</p><p>。。。待补</p><p>本来我以为建完图跑最小生成树，然后树剖就可以了。但是这样的时间复杂度是 $O(n \log^2 n)$ 的。题目中数据范围 n 最大是 $10^6$，又因为树剖天生的大常数，所以 T 了。贴一下 4.1K 的超长代码（~~有纪念意义的一集）</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+});</script></head><body class="post-template"><div class="container"><div class="left-bar"><div class="left-bar__inner"><header class="header"><a class="logo" href="https://ckb2008.github.io/"><img src="https://ckb2008.github.io/media/website/avatar.png" alt="芋艿酱的小窝" width="174" height="174"></a><nav class="navbar"><button class="navbar__toggle" aria-label="Menu" aria-haspopup="true" aria-expanded="false"><span class="navbar__toggle__box"><span class="navbar__toggle__inner">Menu</span></span></button><ul class="navbar__menu"><li><a href="https://ckb2008.github.io/tags/" target="_blank" rel="/tags/" aria-label="Tags"><span>Tags</span></a></li></ul></nav><a class="logo logo--atbottom" href="https://ckb2008.github.io/">芋艿酱的小窝</a></header></div></div><main class="main post"><article class="content"><div class="content__meta content__meta--attop"><div class="content__meta--attop__inner"><div class="content__maintag"><svg width="20" height="20" aria-hidden="true" focusable="false"><use xlink:href="https://ckb2008.github.io/assets/svg/svg-map.svg#tag"/></svg> Published in <a href="https://ckb2008.github.io/tags/icpc/" class="metadata__maintag">ICPC</a> <span class="reading-time" aria-label="12 min read">12 min read</span></div></div></div><div class="main__inner"><div class="content__meta"><div class="content__author"><div><a href="https://ckb2008.github.io/authors/ckbyuina/" class="content__author__name">ckbYuina</a><p>An ACMer from DHU</p></div></div><div class="content__date"><time datetime="2026-11-20T01:37">Nov 20, 2026</time></div></div><header class="content__header"><h1 class="content__title">ICPC 2026 Nanchang Mirror A-D H J</h1></header><div class="content__entry"><p><a href="https://www.luogu.com.cn/contest/372198">link</a></p><h2 id="a">A</h2><p>没什么好说的，签到题。</p><h2 id="b">B</h2><p>待补</p><h2 id="c">C</h2><p>赛时想半天没想出来，@free_fail 大手子倍增 dp 过了 唉，菜就还得多练 用 $f_{i, j, len}$ 表示从 $i$ 到 $j$ 能够 $2^k$ 步所需要的最小天数，则有转移：</p><p>$$ f_{i, j, len} = \min\limits_{i = 1}^n {f_{i, j, len}, max(f_{i, k, len - 1}, f_{k, j, len - 1})} $$</p><p>后面那个式子要取 max，因为要保证两部分都能达到 $2^{len - 1}$ 步数。转移的时候枚举顺序类似 Floyd 最短路，先 k 然后 i 和 j 的顺序。 然后对于询问，由于 w 是定死的，对 w 二进制拆分，然后预处理答案，直接输出即可。 赛时实测把 len 那一维放在最低位会 T，大概是因为内存访问不连续。后面进行了缓存优化，把 len 放到最高位就过了。 赛后重新写了一版代码，实际上根据这个状态定义求出答案的过程，就是矩阵快速幂的过程（把 min 和 max 看成广义加法和广义乘法）。</p><p>原版（采用的是倍增 dp，在二进制拆分 w 的时候需要特判最高位）：</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+using ll = long long;
+
+char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf, obuf[1 &lt;&lt; 20], *p3 = obuf;
+#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
+#define putc(x) (p3 - obuf &lt; (1 &lt;&lt; 20) ? (*p3++ = x) : (fwrite(obuf, p3 - obuf, 1, stdout), p3 = obuf, *p3++=x))
+inline ll read() {
+    ll x = 0, sgn = 0; char s = getc();
+    while(!isdigit(s)) sgn |= s == &#39;-&#39;, s = getc();
+    while(isdigit(s)) x = x * 10 + s - &#39;0&#39;, s = getc();
+    return sgn ? -x : x;
+}
+
+template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
+template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
+template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if (x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
+template&lt;typename T, typename... Args&gt; inline void print(char c, T x, Args... args) { print(x), putc(c), print(args...); }
+
+constexpr int N = 207;
+constexpr ll inf = 1e18;
+
+int n, m, k, q, w;
+ll f[32][N][N], ans[N][N], g[N][N];
+
+int main() {
+    read(n, m);
+    for (int i = 1; i &lt;= n; ++i)
+        for (int j = 1; j &lt;= n; ++j)
+            for (int _ = 0; _ &lt;= 31; ++_)
+                f[_][i][j] = inf, ans[i][j] = inf, g[i][j] = inf;
+
+    for (int i = 1; i &lt;= m; ++i) {
+        int u, v;
+        read(u, v);
+        f[0][u][v] = 0;
+    }
+
+    read(k);
+    for (int i = 1; i &lt;= k; ++i) {
+        int x, y;
+        read(x, y);
+        f[0][x][y] = min(f[0][x][y], 1ll * i);
+    }
+
+    for (int _ = 1; _ &lt;= 31; ++_) {
+        for (int k = 1; k &lt;= n; ++k) {
+            for (int i = 1; i &lt;= n; ++i) {
+                for (int j = 1; j &lt;= n; ++j) {
+                    f[_][i][j] = min(f[_][i][j], max(f[_ - 1][i][k], f[_ - 1][k][j]));
+                }
+            }
+        }
+    }
+
+    read(q, w);
+    int fl = 0;
+    for (int _ = 31; _ &gt;= 0; --_) {
+        if (w &gt;&gt; _ &amp; 1 ^ 1) continue;
+        if (fl) {
+            for (int i = 1; i &lt;= n; ++i) {
+                for (int j = 1; j &lt;= n; ++j) {
+                    g[i][j] = ans[i][j];
+                    ans[i][j] = inf;
+                }
+            }
+            for (int k = 1; k &lt;= n; ++k) {
+                for (int i = 1; i &lt;= n; ++i) {
+                    for (int j = 1; j &lt;= n; ++j) {
+                        ans[i][j] = min(ans[i][j], max(g[i][k], f[_][k][j]));
+                    }
+                }
+            }
+        } else {
+            for (int i = 1; i &lt;= n; ++i) {
+                for (int j = 1; j &lt;= n; ++j) {
+                    ans[i][j] = f[_][i][j];
+                }
+            }
+        }
+        fl = 1;
+    }
+
+    for (int i = 1; i &lt;= q; ++i) {
+        int s, t;
+        read(s, t);
+        if (ans[s][t] == inf) print(-1);
+        else print(ans[s][t]);
+        putc(&#39;\n&#39;);
+    }
+
+    fwrite(obuf, p3 - obuf, 1, stdout);
+    return 0;
+}
+</code></pre><p>矩阵乘法版（直接快速幂即可，比倍增版少一维）：</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+using ll = long long;
+
+char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf, obuf[1 &lt;&lt; 20], *p3 = obuf;
+#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
+#define putc(x) (p3 - obuf &lt; (1 &lt;&lt; 20) ? (*p3++ = x) : (fwrite(obuf, p3 - obuf, 1, stdout), p3 = obuf, *p3++=x))
+inline ll read() {
+    ll x = 0, sgn = 0; char s = getc();
+    while(!isdigit(s)) sgn |= s == &#39;-&#39;, s = getc();
+    while(isdigit(s)) x = x * 10 + s - &#39;0&#39;, s = getc();
+    return sgn ? -x : x;
+}
+
+template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
+template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
+template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if (x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
+template&lt;typename T, typename... Args&gt; inline void print(char c, T x, Args... args) { print(x), putc(c), print(args...); }
+
+constexpr ll inf = 1e18;
+
+int n, m, q, w;
+
+struct mat {
+    vector&lt;vector&lt;ll&gt;&gt; a;
+    mat() {
+        a.resize(n + 1, vector&lt;ll&gt;(n + 1, inf));
+    }
+    mat operator*(mat b) {
+        mat ans;
+        for (int i = 1; i &lt;= n; ++i) {
+            for (int k = 1; k &lt;= n; ++k) {
+                for (int j = 1; j &lt;= n; ++j) {
+                    ans.a[i][j] = min(ans.a[i][j], max(a[i][k], b.a[k][j]));
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+mat f, ans;
+
+void qpow() {
+    ans = f;
+    --w;
+    for (; w; w &gt;&gt;= 1) {
+        if (w &amp; 1) {
+            ans = ans * f;
+        }
+        f = f * f;
+    }
+}
+
+int main() {
+    read(n, m);
+    f = mat(), ans = mat();
+    for (int i = 1; i &lt;= m; ++i) {
+        int u, v;
+        read(u, v);
+        f.a[u][v] = 0;
+    }
+
+    int k = read();
+    for (int i = 1; i &lt;= k; ++i) {
+        int x, y;
+        read(x, y);
+        f.a[x][y] = min(f.a[x][y], 1ll * i);
+    }
+
+    read(q, w);
+    qpow();
+
+    while (q--) {
+        int s, t;
+        read(s, t);
+        if (ans.a[s][t] == inf) print(-1);
+        else print(ans.a[s][t]);
+        putc(&#39;\n&#39;);
+    }
+    
+    fwrite(obuf, p3 - obuf, 1, stdout);
+    return 0;
+}
+</code></pre><blockquote><p>新学了矩阵快速幂的概念。这道题注意到这个状态定义并进行倍增预处理比较重要，感觉 DP 还是没有学好 QaQ，严肃学习ing。</p></blockquote><h2 id="j">J</h2><p>@free_fail 提出可以 $O(n \sqrt n)$ 建图，具体是：</p><p>记 $mx = \max{a_i}$。考虑从 $mx$ 倒序枚举到 $1$，则一定枚举过了每一对 $(a_i, a_j)$ 的 gcd。记当前已经枚举到 $d$，然后再枚举 $d$ 的倍数，记为 $x$。如果 $x$ 到 $a_i$ 之间有连边，而且之前没有被扫到过，那么 $d$ 一定是这样的 $a_i$ 和 $x$ 的最大 gcd，在二者之间连边即可。咋看之下，这样的连边方式会超时。但实际上，$O(\sum \frac{mx}d) = O(mx \sum \frac 1 d) = O(mx \ln d)$，这里用到了 $\sum \frac 1 i \sim \ln n$。</p><p>本来我以为建完图跑最小生成树，然后树剖就可以了。但是这样的时间复杂度是 $O(n \log^2 n)$ 的。题目中数据范围 n 最大是 $10^6$，又因为树剖天生的大常数，所以 T 了。贴一下 4.1K 的超长代码（<del>最有纪念意义的一集</del>）</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 using ll = long long;
 
@@ -271,7 +449,7 @@ int main() {
     fwrite(obuf, p3 - obuf, 1, stdout);
     return 0;
 }
-</code></pre></div><footer class="content__footer"><div class="content__last-updated">This article was updated on <time datetime="2026-11-20T01:41">Nov 20, 2026</time></div><div class="content__share"></div></footer></div></article><div class="content__section banner"><div class="main__inner"><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/gh/ckb2008/ckb2008/gitalk-math.js?v=2.3.0"></script><div id="gitalk-container"></div><script>GitalkMath.init({
+</code></pre></div><footer class="content__footer"><div class="content__last-updated">This article was updated on <time datetime="2026-11-22T17:12">Nov 22, 2026</time></div><div class="content__share"></div></footer></div></article><div class="content__section banner"><div class="main__inner"><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/gh/ckb2008/ckb2008/gitalk-math.js?v=2.3.0"></script><div id="gitalk-container"></div><script>GitalkMath.init({
   version: '0.16.9',                     // KaTeX 版本
   cdn: 'https://cdn.jsdelivr.net/npm/katex@',  // 自定义 CDN 前缀
   mhchem: false,                         // 是否加载 mhchem（\ce{} 化学式）
