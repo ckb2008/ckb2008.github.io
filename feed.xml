@@ -3,7 +3,7 @@
     <title>芋艿酱的小窝</title>
     <link href="https://ckb2008.github.io/feed.xml" rel="self" />
     <link href="https://ckb2008.github.io" />
-    <updated>2026-11-22T23:19:42+08:00</updated>
+    <updated>2026-11-23T00:10:32+08:00</updated>
     <author>
         <name>ckbYuina</name>
     </author>
@@ -87,8 +87,7 @@ int main() {
 }
 </code></pre>
 <blockquote>
-<p>这么简单的题也想不出来，该加训了
-做题的时候充分性想到了，但是对于必要性还是有点疑惑（）</p></blockquote>
+<p>这么简单的题也想不出来，该加训了</p><p>做题的时候充分性想到了，但是对于必要性还是有点疑惑（）</p></blockquote>
 <h2 id="c">C</h2>
 <p>用 $f_{i, j, len}$ 表示从 $i$ 到 $j$ 能够 $2^k$ 步所需要的最小天数，则有转移：</p><p>$$
  f_{i, j, len} = \min\limits_{i = 1}^n {f_{i, j, len}, max(f_{i, k, len - 1}, f_{k, j, len - 1})} 
