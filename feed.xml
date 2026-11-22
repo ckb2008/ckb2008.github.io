@@ -3,12 +3,1430 @@
     <title>芋艿酱的小窝</title>
     <link href="https://ckb2008.github.io/feed.xml" rel="self" />
     <link href="https://ckb2008.github.io" />
-    <updated>2026-11-23T00:10:32+08:00</updated>
+    <updated>2026-11-23T02:52:07+08:00</updated>
     <author>
         <name>ckbYuina</name>
     </author>
     <id>https://ckb2008.github.io</id>
 
+    <entry>
+        <title>芋艿酱的 ACM 板子</title>
+        <author>
+            <name>ckbYuina</name>
+        </author>
+        <link href="https://ckb2008.github.io/yu-nai-jiang-de-acm-ban-zi/"/>
+        <id>https://ckb2008.github.io/yu-nai-jiang-de-acm-ban-zi/</id>
+
+        <updated>2026-11-23T02:52:07+08:00</updated>
+            <summary type="html">
+                <![CDATA[
+                    老模板已经过时，现在是新模板时代~ #include &lt;bits/stdc++.h&gt; using namespace std; using ll = long long; #define&hellip;
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <blockquote>
+<p>老模板已经过时，现在是新模板时代~</p></blockquote>
+<h1 id="文件模板">文件模板</h1>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+using ll = long long;
+
+#define dbg(x...) fprintf(stderr, x);
+
+char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf, obuf[1 &lt;&lt; 20], *p3 = obuf;
+#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
+#define putc(x) (p3 - obuf &lt; (1 &lt;&lt; 20) ? (*p3++ = x) : (fwrite(obuf, p3 - obuf, 1, stdout), p3 = obuf, *p3++=x))
+inline ll read() {
+    ll x = 0, sgn = 0; char s = getc();
+    while(!isdigit(s)) sgn |= s == &#39;-&#39;, s = getc();
+    while(isdigit(s)) x = x * 10 + s - &#39;0&#39;, s = getc();
+    return sgn ? -x : x;
+}
+
+template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
+template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
+template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if (x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
+template&lt;typename T, typename... Args&gt; inline void print(char c, T x, Args... args) { print(x), putc(c), print(args...); }
+
+
+
+int main() {
+    
+    
+    
+    fwrite(obuf, p3 - obuf, 1, stdout);
+    return 0;
+}
+=
+</code></pre>
+<h1 id="数学">数学</h1>
+<h2 id="高斯消元-1">高斯消元 1</h2>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+using ll = long long;
+
+#define dbg(x...) fprintf(stderr, x);
+
+char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf, obuf[1 &lt;&lt; 20], *p3 = obuf;
+#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
+#define putc(x) (p3 - obuf &lt; (1 &lt;&lt; 20) ? (*p3++ = x) : (fwrite(obuf, p3 - obuf, 1, stdout), p3 = obuf, *p3++=x))
+inline ll read() {
+    ll x = 0, sgn = 0; char s = getc();
+    while(!isdigit(s)) sgn |= s == &#39;-&#39;, s = getc();
+    while(isdigit(s)) x = x * 10 + s - &#39;0&#39;, s = getc();
+    return sgn ? -x : x;
+}
+
+template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
+template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
+template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if (x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
+template&lt;typename T, typename... Args&gt; inline void print(char c, T x, Args... args) { print(x), putc(c), print(args...); }
+
+constexpr int N = 107;
+constexpr double eps = 1e-7;
+
+int n;
+double a[N][N], f[N];
+
+int main() {
+    scanf(&quot;%d&quot;, &amp;n);
+    for (int i = 1; i &lt;= n; ++i) {
+        for (int j = 1; j &lt;= n; ++j) {
+            scanf(&quot;%lf&quot;, &amp;a[i][j]);
+        }
+        scanf(&quot;%lf&quot;, f + i);
+    }
+
+    for (int i = 1; i &lt;= n; ++i) {
+        int p = i;
+        for (int j = i + 1; j &lt;= n; ++j) {
+            if (abs(f[p])) p = j;
+        }
+        if (p != i) {
+            for (int j = 1; j &lt;= n; ++j) swap(a[p][i], a[i][j]);
+            swap(f[i], f[p]);
+        }
+
+        for (int j = 1; j &lt;= n; ++j) {
+            if (i == j) continue;
+            double d = a[j][i] / a[i][i];
+            for (int k = 1; k &lt;= n; ++k) {
+                a[j][k] -= a[i][k] * d;
+            }
+            f[j] -= f[i] * d;
+        }
+    }    
+
+    bool fl = 0;
+    for (int i = 1; i &lt;= n; ++i) {
+        int cnt = 0;
+        for (int j = 1; j &lt;= n; ++j) {
+             cnt += abs(a[i][j]]) &gt; eps;
+        }
+        if (cnt != 1) fl = 1;
+        if (a[i][i]) f[i] /= a[i][i];
+    }
+
+    if (fl) {
+        puts(&quot;No Solution&quot;);
+    } else {
+        for (int i = 1; i &lt;= n; ++i) {
+            printf(&quot;%.2lf\n&quot;, f[i]);
+        }
+    }
+    
+    fwrite(obuf, p3 - obuf, 1, stdout);
+    return 0;
+}
+</code></pre>
+<h2 id="高斯消元-2">高斯消元 2</h2>
+<p><code>fl = 0</code> 无数解，<code>fl = -1</code> 无解。</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+using ll = long long;
+
+#define dbg(x...) fprintf(stderr, x);
+
+char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf, obuf[1 &lt;&lt; 20], *p3 = obuf;
+#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
+#define putc(x) (p3 - obuf &lt; (1 &lt;&lt; 20) ? (*p3++ = x) : (fwrite(obuf, p3 - obuf, 1, stdout), p3 = obuf, *p3++=x))
+inline ll read() {
+    ll x = 0, sgn = 0; char s = getc();
+    while(!isdigit(s)) sgn |= s == &#39;-&#39;, s = getc();
+    while(isdigit(s)) x = x * 10 + s - &#39;0&#39;, s = getc();
+    return sgn ? -x : x;
+}
+
+template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
+template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
+template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if (x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
+template&lt;typename T, typename... Args&gt; inline void print(char c, T x, Args... args) { print(x), putc(c), print(args...); }
+
+constexpr int N = 107;
+constexpr double eps = 1e-7;
+
+int n;
+double a[N][N], f[N];
+
+int main() {
+    scanf(&quot;%d&quot;, &amp;n);
+    for (int i = 1; i &lt;= n; ++i) {
+        for (int j = 1; j &lt;= n; ++j) {
+            scanf(&quot;%lf&quot;, &amp;a[i][j]);
+        }
+        scanf(&quot;%lf&quot;, f + i);
+    }
+
+    for (int i = 1; i &lt;= n; ++i) {
+        int p = i;
+        for (int j = 1; j &lt;= n; ++j) {
+            if (abs(a[j][j]) &gt; eps &amp;&amp; j &lt; i) continue;
+            if (abs(a[j][i]) &gt; abs(a[p][i])) {
+                p = j;
+            }
+        }
+        for (int j = 1; j &lt;= n; ++j) {
+            swap(a[p][j], a[i][j]);
+        }
+        swap(f[i], f[p]);
+        if (abs(a[i][i]) &lt;= eps) continue;
+
+        for (int j = 1; j &lt;= n; ++j) {
+            if (i == j) continue;
+            double d = a[j][i] / a[i][i];
+            for (int k = 1; k &lt;= n; ++k) {
+                a[j][k] -= a[i][k] * d;
+            }
+            f[j] -= f[i] * d;
+        }
+    }    
+
+    int fl = 1;
+    for (int i = 1; i &lt;= n; ++i) {
+        if (abs(a[i][i]) &lt;= eps) {
+            if (abs(f[i]) &gt; eps) {
+                fl = -1;
+            } else if (fl != -1) {
+                fl = 0;
+            }
+        }
+    }
+
+    if (fl &lt; 1) printf(&quot;%d&quot;, fl);
+    else {
+        for (int i = 1; i &lt;= n; ++i) {
+            printf(&quot;x%d=%.2lf\n&quot;, i, abs(f[i] / a[i][i]) &lt;= eps ? 0 : f[i] / a[i][i]);
+        }
+    }
+    
+    fwrite(obuf, p3 - obuf, 1, stdout);
+    return 0;
+}
+</code></pre>
+<h2 id="二元一次不定方程">二元一次不定方程</h2>
+<pre><code class="language-cpp">ll exgcd(ll a, ll b, ll&amp; x, ll&amp; y) {
+    if (!b) return x = 1, y = 0, a;
+    ll g = exgcd(b, a % b, y, x);
+    return y = y - a / b * x, g;
+}
+</code></pre>
+<h2 id="中国剩余定理">中国剩余定理</h2>
+<p>要求模数互质</p><pre><code class="language-cpp">// P1495 【模板】中国剩余定理（CRT）/ 曹冲养猪
+// 125 MB 1000 ms
+
+#include &lt;bits/stdc++.h&gt;
+
+#define rep(i, a, b) for (int i = (a); i &lt;= (b); ++i)
+#define per(i, a, b) for (int i = (a); i &gt;= (b); --i)
+#define mst(a, k) memset(a, k, sizeof a)
+#define minv(a, b) a = min(a, b)
+#define maxv(a, b) a = max(a, b)
+
+#define gcd(a, b) __gcd((ll)a, (ll)b)
+#define lcm(a, b) (a / gcd(a, b) * b)
+
+#define gc(x) getchar(x)
+#define pc(x) putchar(x)
+#define put(x) printf(&quot;%d\n&quot;, x)
+#define putl(x) printf(&quot;%lld\n&quot;, x)
+#define mts() int t; scanf(&quot;%d&quot;, &amp;t); while (t--) solve()
+
+#define dbg(x...) fprintf(stderr, x)
+#define dbgv(a, l, r) rep (i, l, r) fprintf(stderr, &quot;%lld&quot;, (ll)a[i])
+
+#define inf 0x3f3f3f3f
+#define infl ((ll)1e18)
+
+using namespace std;
+using db = double;
+using ll = __int128;
+using ull = unsigned long long;
+
+template&lt;int size = 1 &lt;&lt; 20&gt;
+struct IO {
+    char in[size], out[size], *p1, *p2, *pp;
+    IO() : p1(in), p2(in), pp(out) {}
+    ~IO() { fwrite(out, 1, pp - out, stdout); }
+    inline char gc() { if (p1 == p2) p2 = (p1 = in) + fread(in, 1, size, stdin); return p1 == p2 ? &#39; &#39; : *p1++; }
+    inline bool blank(char ch) { return ch == &#39; &#39; || ch == &#39;\n&#39; || ch == &#39;\r&#39; || ch == &#39;\t&#39;; }
+    template&lt;class T&gt; inline void read(T&amp; x) { double tmp = 1; bool sign = 0; x = 0; char ch = gc(); for (; !isdigit(ch); ch = gc()) sign |= ch == 45; for (; isdigit(ch); ch = gc()) x = x * 10 + ch - 48; if (ch == &#39;.&#39;) for (ch = gc(); isdigit(ch); ch = gc()) tmp /= 10.0, x += tmp * (ch - &#39;0&#39;); if (sign) x = -x; }
+    inline void read(char&amp; c) { while (!blank(c)) c = gc(); }
+    template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
+    inline void push(const char&amp; c) { if (pp - out == size) fwrite(out, 1, size, stdout), pp = out; *pp++ = c; }
+    inline void write(char c) { push(c); }
+    template&lt;class T&gt;
+    inline void write(T x) { if (x &lt; 0) x = -x, push(&#39;-&#39;); static T sta[35]; T top = 0; do sta[top++] = x % 10, x /= 10; while (x); while (top) push(sta[--top] + &#39;0&#39;); }
+    template&lt;class T&gt; inline void write(T x, char c) { write(x), push(c); }
+    template&lt;typename T, typename... Args&gt; inline void write(const T x, const Args... args) { write(x), write(args...); }
+};
+IO&lt;&gt; io;
+
+struct dsu {
+    vector&lt;int&gt; f;
+    dsu(int n) { f.resize(n + 1); iota(f.begin() + 1, f.end(), 1); }
+    int find(int x) { return x == f[x] ? x : f[x] = find(f[x]); }
+    bool merge(int x, int y) {
+        x = find(x), y = find(y);
+        return x == y ? 0 : f[x] = y, 1;
+    }
+    void clear() { iota(f.begin(), f.end(), 1); }
+};
+
+struct bit {
+    int n;
+    vector&lt;ll&gt; c;
+    bit(int x) : c(n + 1) { n = x; }
+    void add(int x, ll y) {
+        for (; x &lt;= n; x += (x &amp; -x)) c[x] += y;
+    }
+    ll _ask(int x) {
+        ll ans = 0;
+        for (; x; x -= (x &amp; -x)) ans += c[x];
+        return ans;
+    }
+    ll ask(int l, int r) { return _ask(r) - _ask(l - 1); }
+};
+
+ll exgcd(ll a, ll b, ll&amp; x, ll&amp; y) {
+    if (!b) return x = 1, y = 0, a;
+    ll g = exgcd(b, a % b, y, x);
+    return y = y - a / b * x, g;
+}
+
+constexpr int N = 1e5 + 7;
+
+ll n, a[N], b[N];
+
+int main() {
+    // mts();
+    io.read(n);
+    rep (i, 1, n) io.read(a[i], b[i]);
+    
+    ll M = 1, ans = 0;
+    rep (i, 1, n) M *= a[i];
+    rep (i, 1, n) {
+        ll m = M / a[i], B, y;
+        exgcd(m, a[i], B, y);
+        ans = (ans + b[i] * m * B % M) % M;
+    }
+    io.write((ans % M + M) % M);
+    
+    return 0;
+}
+</code></pre>
+<h1 id="字符串">字符串</h1>
+<h2 id="trie">Trie</h2>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+
+using ll = long long;
+
+constexpr int N = 3e6 + 7;
+
+int t[N][65], cnt, end[N];
+char a[N];
+
+int id(char c) {
+    if (c &gt;= &#39;A&#39; &amp;&amp; c &lt;= &#39;Z&#39;) return c - &#39;A&#39;;
+    else if (c &gt;= &#39;a&#39; &amp;&amp; c &lt;= &#39;z&#39;) return c - &#39;a&#39; + 26;
+    else return c - &#39;0&#39; + 52;
+}
+
+void clear() {
+    for (int i = 0; i &lt;= cnt; ++i) 
+        for (int j = 0; j &lt;= 63; ++j)
+            t[i][j] = 0;
+    for (int i = 0; i &lt;= cnt; ++i)
+        end[i] = 0;
+    cnt = 0;
+}
+
+void insert(char* s) {
+    int len = strlen(s);
+    int p = 0;
+    for (int i = 0; i &lt; len; ++i) {
+        int x = id(s[i]);
+        if (!t[p][x]) t[p][x] = ++cnt;
+        p = t[p][x];
+        ++end[p];
+    }
+}
+
+int ask(char *s) {
+    int len = strlen(s);
+    int p = 0;
+    for (int i = 0; i &lt; len; ++i) {
+        int x = id(s[i]);
+        if (!t[p][x]) return 0;
+        p = t[p][x];
+    }
+    return end[p];
+}
+
+int main() {
+    int T;
+    scanf(&quot;%d&quot;, &amp;T);
+    
+    while (T--) {
+        clear();
+        int n, q;
+        scanf(&quot;%d %d&quot;, &amp;n, &amp;q);
+        for (int i = 1; i &lt;= n; ++i) {
+            scanf(&quot;%s&quot;, a);
+            insert(a);
+        }
+        for (int i = 1; i &lt;= q; ++i) {
+            scanf(&quot;%s&quot;, a);
+            printf(&quot;%d\n&quot;, ask(a));
+        }
+    }	
+    
+    return 0;
+} 
+</code></pre>
+<h2 id="01trie">01Trie</h2>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+#define int ll
+using namespace std;
+using ll = long long;
+
+char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf;
+#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
+#define putc(x) putchar_unlocked(x)
+inline ll read() {
+    ll x = 0, sgn = 0; char s = getc();
+    while(!isdigit(s)) sgn |= s == &#39;-&#39;, s = getc();
+    while(isdigit(s)) x = x * 10 + s - &#39;0&#39;, s = getc();
+    return sgn ? -x : x;
+}
+
+template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
+template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
+template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if (x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
+template&lt;typename T, typename... Args&gt; inline void print(T x, Args... args) { print(x), print(args...); }
+
+constexpr int N = 3e5 + 7;
+
+int n;
+struct edge {
+    int to, ne, w;
+} e[N &lt;&lt; 1];
+int cnt, head[N];
+
+void add(int x, int y, int z) { e[++cnt] = {y, head[x], z}, head[x] = cnt; }
+
+int val[N];
+void dfs(int x, int fa) {
+    for (int i = head[x]; i; i = e[i].ne) {
+        int tn = e[i].to, w = e[i].w;
+        if (tn == fa) continue;
+        val[tn] = val[x] ^ w;
+        dfs(tn, x);
+    }
+}
+
+int nxe[N &lt;&lt; 5][2], tot;
+
+void insert(int x) {
+    int p = 0;
+    for (int i = 30; i &gt;= 0; --i) {
+        int k = x &gt;&gt; i &amp; 1;
+        if (!nxe[p][k]) nxe[p][k] = ++tot;
+        p = nxe[p][k];
+    }
+}
+
+int calc(int x) {
+    int ans = 0, p = 0;
+    for (int i = 30; i &gt;= 0; --i) {
+        int k = x &gt;&gt; i &amp; 1;
+        if (nxe[p][k ^ 1]) p = nxe[p][k ^ 1], ans = ans &lt;&lt; 1 | (k ^ 1);
+        else p = nxe[p][k], ans = ans &lt;&lt; 1 | k;
+    }
+    return ans;
+}
+
+signed main() {
+    read(n);
+    for (int i = 1, u, v, w; i &lt; n; ++i) 
+        read(u, v, w), add(u, v, w), add(v, u, w);
+
+    dfs(1, 0);
+    for (int i = 1; i &lt;= n; ++i) insert(val[i]);
+    int res = 0;
+    for (int i = 1; i &lt;= n; ++i) res = max(res, val[i] ^ calc(val[i]));
+    print(res);
+
+    return 0;
+}
+</code></pre>
+<h2 id="kmp">KMP</h2>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+
+using ll = long long;
+
+constexpr int N = 1e6 + 7;
+
+char a[N], b[N];
+
+auto main()-&gt;int {
+    #ifndef fastio
+        std::cin.tie(nullptr)-&gt;sync_with_stdio(false);
+    #endif
+    
+    // freopen(&quot;log.txt&quot;, &quot;w&quot;, stderr);
+
+    scanf(&quot;%s\n%s&quot;, a + 1, b + 1);
+
+    int n = strlen(a + 1), m = strlen(b + 1);
+    std::vector&lt;int&gt; ne(m + 1, 0);
+    for (int i = 2, j = 0; i &lt;= m; ++i) {
+        while (j &amp;&amp; b[i] != b[j + 1]) {
+            j = ne[j];
+        }
+        if (b[i] == b[j + 1]) {
+            ++j;
+        }
+        ne[i] = j;
+    }
+
+    std::vector&lt;int&gt; f(n + 1, 0);
+    for (int i = 1, j = 0; i &lt;= n; ++i) {
+        while (j &amp;&amp; a[i] != b[j + 1]) {
+            j = ne[j];
+        }
+        if (a[i] == b[j + 1]) {
+            ++j;
+        }
+        f[i] = j;
+        if (f[i] == m) {
+            j = ne[j];
+        }
+    }
+
+    for (int i = 1; i &lt;= n; ++i) {
+        if (f[i] == m) {
+            printf(&quot;%d\n&quot;, i - m + 1);
+        }
+    }
+
+    for (int i = 1; i &lt;= m; ++i) {
+        printf(&quot;%d &quot;, ne[i]);
+    }
+    
+    return 0;
+}
+</code></pre>
+<h2 id="manacher">Manacher</h2>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+
+using ll = long long;
+
+constexpr int N = 1.1e7 + 7;
+
+char s[N &lt;&lt; 1];
+int p[N &lt;&lt; 1], cnt = 1, ans;
+
+void read() {
+    char c = getchar();
+    s[0] = &#39;~&#39;, s[1] = &#39;|&#39;;
+    for (; c &lt; &#39;a&#39; &amp;&amp; c &gt; &#39;z&#39;; c = getchar());
+    for (; c &gt;= &#39;a&#39; &amp;&amp; c &lt;= &#39;z&#39;; c = getchar()) {
+        s[++cnt] = c, s[++cnt] = &#39;|&#39;;
+    }
+} 
+
+int main() {
+    read();
+    for (int i = 1, r = 0, mid = 0; i &lt;= cnt; ++i) {
+        if (i &lt;= r) {
+            p[i] = std::min(p[mid * 2 - i], r - i + 1);
+        }
+        for (; s[i - p[i]] == s[i + p[i]]; ++p[i]);
+        if (p[i] + i &gt; r) {
+            r = p[i] + i - 1, mid = i;
+        }
+        ans = std::max(ans, p[i]);
+    }
+    printf(&quot;%d\n&quot;, ans - 1);
+    
+    return 0;
+}
+ 
+</code></pre>
+<h1 id="图论">图论</h1>
+<h2 id="spfa-判负环">SPFA 判负环</h2>
+<pre><code class="language-cpp">bool spfa() {
+    for (int _ = 1; _ &lt;= n; ++_) {
+        bool fl = 0;
+        for (int x = 1; x &lt;= n; ++x) {
+            for (int i = head[x]; i; i = e[i].ne) {
+                  int tn = e[i].to, w = e[i].w;
+                if (d[i] &gt; d[tn] + w) {
+                    d[i] = d[tn] + w, fl = 1;
+                }
+            }
+        }
+        if (!fl) break;
+    }
+
+    for (int x = 1; x &lt;= n; ++x) {
+        for (int i = head[x]; i; i = e[i].ne) {
+            int tn = e[i].to, w = e[i].w;
+            if (d[x] &gt; d[tn] + w) return 0;
+        }
+    }
+    return 1;
+}
+</code></pre>
+<h2 id="tarjan缩点">Tarjan缩点</h2>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+using ll = long long;
+
+ll read() {
+    ll x = 0;
+    #define gc getchar
+    char c = getchar();
+    int f = 0;
+    for (; !isdigit(c); c = getchar()) f |= c == &#39;-&#39;;
+    for (; isdigit(c); c = getchar()) x = x * 10 + c - &#39;0&#39;;
+    #undef gc
+    return f ? -x : x;
+}
+
+template&lt;typename T&gt; void read(T&amp; x) { x = read(); }
+
+template&lt;typename T, typename... Args&gt; void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
+
+constexpr int N = 1e4 + 7;
+constexpr int M = 1e5 + 7;
+
+int n, m;
+
+struct edge {
+    int fr, to, ne;
+} e[M], ee[M];
+
+int cnt, head[N];
+
+void add(int x, int y) {
+    e[++cnt] = {x, y, head[x]}, head[x] = cnt;
+}
+
+int cnte, heade[N];
+
+void adde(int x, int y) {
+    ee[++cnte] = {x, y, heade[x]}, heade[x] = cnte;
+}
+
+int a[N], b[N], low[N], dfn[N], stk[N], top, scc[N], sc, v[N], tot;
+
+void tarjan(int x) {
+    low[x] = dfn[x] = ++tot, stk[++top] = x, v[x] = 1;
+    for (int i = head[x]; i; i = e[i].ne) {
+        int tn = e[i].to;
+        if (!dfn[tn]) {
+            tarjan(tn);
+            low[x] = min(low[x], low[tn]);
+        } else if (v[tn]) {
+            low[x] = min(low[x], dfn[tn]);
+        }
+    }
+    if (dfn[x] == low[x]) {
+        ++sc;
+        while (stk[top] != x) {
+            v[stk[top]] = 0;
+            b[sc] += a[stk[top]];
+            scc[stk[top]] = sc;
+            --top;
+        }
+        v[x] = 0;
+        b[sc] += a[x];
+        scc[x] = sc;
+        --top;
+    }
+}
+
+int deg[N], dis[N];
+
+void topo() {
+    queue&lt;int&gt; q;
+    for (int i = 1; i &lt;= sc; ++i) if (!deg[i]) q.push(i);
+    for (int i = 1; i &lt;= sc; ++i) dis[i] = b[i];
+    while (!q.empty()) {
+        int x = q.front(); q.pop();
+        for (int i = heade[x]; i; i = ee[i].ne) {
+            int tn = ee[i].to;
+            dis[tn] = max(dis[tn], dis[x] + b[tn]);
+            if (!--deg[tn]) q.push(tn);
+        }
+    }
+    printf(&quot;%d\n&quot;, *max_element(dis + 1, dis + n + 1));
+}
+
+int main() {
+    read(n, m);
+    for (int i = 1; i &lt;= n; ++i) read(a[i]);
+    
+    for (int i = 1; i &lt;= m; ++i) {
+        int u, v;
+        read(u, v);
+        add(u, v);
+    }
+    
+    for (int i = 1; i &lt;= n; ++i) if (!dfn[i]) tarjan(i);
+    
+    for (int i = 1; i &lt;= n; ++i)
+        for (int j = head[i]; j; j = e[j].ne) {
+            int x = scc[i], y = scc[e[j].to];
+            if (x != y) adde(x, y), ++deg[y];
+        }
+    
+    topo();
+
+    return 0;
+}
+</code></pre>
+<h1 id="数据结构">数据结构</h1>
+<h2 id="分块">分块</h2>
+<pre><code class="language-cpp">int n, m, a[N], pos[N], L[N], R[N];
+ll add[N], sum[N];
+
+void init() {
+    int t = sqrt(n);
+    for (int i = 1; i &lt;= t; ++i)
+        L[i] = (i - 1) * sqrt(n) + 1, R[i] = i * sqrt(n);
+    if (R[t] &lt; n) ++t, L[t] = R[t - 1] + 1, R[t] = n;
+    for (int i = 1; i &lt;= t; ++i)
+        for (int j = L[i]; j &lt;= R[i]; ++j)
+            pos[j] = i, sum[i] += a[j];
+}
+
+void upd(int l, int r, ll x) {
+    int p = pos[l], q = pos[r];
+    if (p == q) {
+        for (int i = l; i &lt;= r; ++i) a[i] += x;
+        sum[p] += x * (r - l + 1);
+    }
+    else {
+        for (int i = p + 1; i &lt;= q - 1; ++i) add[i] += x;
+        for (int i = l; i &lt;= R[p]; ++i) a[i] += x;
+        sum[p] += x * (R[p] - l + 1);
+        for (int i = L[q]; i &lt;= r; ++i) a[i] += x;
+        sum[q] += x * (r - L[q] + 1);
+    }
+}
+
+ll ask(int l, int r) {
+    int p = pos[l], q = pos[r]; ll ans = 0;
+    if (p == q) {
+        for (int i = l; i &lt;= r; ++i) ans += a[i];
+        ans += add[p] * (r - l + 1);
+    } else {
+        for (int i = p + 1; i &lt;= q - 1; ++i) 
+            ans += sum[i] + add[i] * (R[i] - L[i] + 1);
+        for (int i = l; i &lt;= R[p]; ++i) ans += a[i];
+        ans += add[p] * (R[p] - l + 1);
+        for (int i = L[q]; i &lt;= r; ++i) ans += a[i];
+        ans += add[q] * (r - L[q] + 1);
+    }
+    return ans;
+}
+</code></pre>
+<h2 id="树链剖分">树链剖分</h2>
+<p>如果需要边权转点权：<code>a[tn] = w</code> 询问的最后一行改成 <code>query(1, 1, tot, loc[x] + 1, loc[y])</code></p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+#define int ll
+using namespace std;
+using ll = long long;
+
+int n, m, r, P, a[100007];
+
+struct edge{
+    int to, ne;
+} e[200007];
+
+int cnt, head[100007];
+
+void add(int x, int y) {
+    e[++cnt] = {y, head[x]}, head[x] = cnt;
+}
+
+int f[100007], dep[100007], sz[100007], son[100007];
+void dfs1(int x, int fa) {
+    dep[x] = dep[f[x] = fa] + (sz[x] = 1);
+    for (int i = head[x]; i; i = e[i].ne) {
+        int tn = e[i].to;
+        if (tn == fa) continue;
+        dfs1(tn, x);
+        sz[x] += sz[tn];
+        if (sz[son[x]] &lt; sz[tn]) son[x] = tn;
+    }
+}
+
+int loc[100007], tot, id[100007], top[100007];
+void dfs2(int x, int tp) {
+    top[x] = tp, id[loc[x] = ++tot] = x;
+    if (!son[x]) return;
+    dfs2(son[x], tp);
+    for (int i = head[x]; i; i = e[i].ne) {
+        int tn = e[i].to;
+        if (tn == son[x] || tn == f[x]) continue;
+        dfs2(tn, tn);
+    }
+}
+
+int su[400007], ad[400007];
+void pushup(int p) {
+    su[p] = (su[p &lt;&lt; 1] + su[p &lt;&lt; 1 | 1]) % P;
+}
+
+void pushdown(int p, int l, int r) {
+    if (!ad[p]) return;
+    int mid = l + r &gt;&gt; 1;
+    ad[p &lt;&lt; 1] += ad[p], ad[p &lt;&lt; 1 | 1] += ad[p];
+    su[p &lt;&lt; 1] += ad[p] * (mid - l + 1);
+    su[p &lt;&lt; 1 | 1] += ad[p] * (r - mid);
+    ad[p] = 0;
+}
+
+void build(int p, int l, int r) {
+    if (l == r) {
+        su[p] = a[id[l]] % P;
+        return;
+    }
+    int mid = l + r &gt;&gt; 1;
+    build(p &lt;&lt; 1, l, mid);
+    build(p &lt;&lt; 1 | 1, mid + 1, r);
+    pushup(p);
+}
+
+void modify(int p, int l, int r, int L, int R, int v) {
+    if (L &lt;= l &amp;&amp; R &gt;= r) {
+        (ad[p] += v) %= P;
+        (su[p] += v * (r - l + 1)) %= P;
+        return;
+    }
+    pushdown(p, l, r); 
+    int mid = l + r &gt;&gt; 1;
+    if (L &lt;= mid) modify(p &lt;&lt; 1, l, mid, L, R, v);
+    if (R &gt; mid) modify(p &lt;&lt; 1 | 1, mid + 1, r, L, R, v);
+    pushup(p);
+}
+
+int query(int p, int l, int r, int L, int R) {
+    if (L &lt;= l &amp;&amp; R &gt;= r) return su[p] % P;
+    pushdown(p, l, r);
+    int mid = l + r &gt;&gt; 1, ans = 0;
+    if (L &lt;= mid) (ans += query(p &lt;&lt; 1, l, mid, L, R)) %= P;
+    if (R &gt; mid) (ans += query(p &lt;&lt; 1 | 1, mid + 1, r, L, R)) %= P;
+    return ans % P;
+}
+
+void upd(int x, int y, int v) {
+    while (top[x] != top[y]) {
+        if (dep[f[top[x]]] &lt; dep[f[top[y]]]) swap(x, y);
+        modify(1, 1, tot, loc[top[x]], loc[x], v);
+        x = f[top[x]];
+    }
+    if (dep[x] &gt; dep[y]) swap(x, y);
+    modify(1, 1, tot, loc[x], loc[y], v);
+}
+
+int sum(int x, int y) {
+    int res = 0;
+    while (top[x] != top[y]) {
+        if (dep[f[top[x]]] &lt; dep[f[top[y]]]) swap(x, y);
+        (res += query(1, 1, tot, loc[top[x]], loc[x])) %= P;
+        x = f[top[x]];
+    }
+    if (dep[x] &gt; dep[y]) swap(x, y);
+    (res += query(1, 1, tot, loc[x], loc[y])) %= P;
+    return res; 
+}
+
+int lca(int x, int y) {
+    while (top[x] != top[y]) {
+        if (dep[top[x]] &lt; dep[top[y]]) swap(x, y);
+        x = f[top[x]];
+    }
+    return dep[x] &lt; dep[y] ? x : y;
+}
+
+signed main() {
+//	freopen(&quot;1.in&quot;, &quot;r&quot;, stdin);
+    
+    scanf(&quot;%lld %lld %lld %lld&quot;, &amp;n, &amp;m, &amp;r, &amp;P);
+    for (int i = 1; i &lt;= n; ++i) scanf(&quot;%d&quot;, &amp;a[i]);
+    for (int i = 1, u, v; i &lt; n; ++i) {
+        scanf(&quot;%lld %lld&quot;, &amp;u, &amp;v);
+        add(u, v), add(v, u);
+    }
+    
+    dfs1(r, 0), dfs2(r, r);
+    build(1, 1, tot);
+    
+    for (int i = 1, opt, x, y, z; i &lt;= m; ++i) {
+        scanf(&quot;%lld&quot;, &amp;opt);
+        if (opt == 1) {
+            scanf(&quot;%lld %lld %lld&quot;, &amp;x, &amp;y, &amp;z);
+            upd(x, y, z);
+        } else if (opt == 2) {
+            scanf(&quot;%lld %lld&quot;, &amp;x, &amp;y);
+            printf(&quot;%lld\n&quot;, sum(x, y));
+        } else if (opt == 3) {
+            scanf(&quot;%lld %lld&quot;, &amp;x, &amp;z);
+            modify(1, 1, tot, loc[x], loc[x] + sz[x] - 1, z % P);
+        } else {
+            scanf(&quot;%lld&quot;, &amp;x);
+            printf(&quot;%lld\n&quot;, query(1, 1, tot, loc[x], loc[x] + sz[x] - 1) % P);
+        }
+    }
+    
+    return 0;
+} 
+</code></pre>
+<h2 id="离散二维数点">离散二维数点</h2>
+<p>求序列的区间 <code>[l, r]</code> 内小于等于 <code>x</code> 的数的个数</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+using ll = long long;
+
+char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf, obuf[1 &lt;&lt; 20], *p3 = obuf;
+#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
+#define putc(x) (p3 - obuf &lt; (1 &lt;&lt; 20) ? (*p3++ = x) : (fwrite(obuf, p3 - obuf, 1, stdout), p3 = obuf, *p3++=x))
+inline ll read() {
+    ll x = 0, sgn = 0; char s = getc();
+    while(!isdigit(s)) sgn |= s == &#39;-&#39;, s = getc();
+    while(isdigit(s)) x = x * 10 + s - &#39;0&#39;, s = getc();
+    return sgn ? -x : x;
+}
+
+template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
+template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
+template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if (x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
+template&lt;typename T, typename... Args&gt; inline void print(T x, Args... args) { print(x), print(args...); }
+
+constexpr int N = 2e6 + 7;
+
+struct qq {
+    int id, k, x, val;
+    bool operator&lt;(qq r) const { return k &lt; r.k; }
+} q[N &lt;&lt; 1];
+
+int n, m, a[N], mx, c[N], ans[N], cnt;
+
+void add(int x) {
+    for (; x &lt;= mx; x += x &amp; -x) ++c[x];
+}
+
+int qry(int x) {
+    int ans = 0;
+    for (; x; x -= x &amp; -x) ans += c[x];
+    return ans;
+}
+
+int main() {
+    read(n, m);
+    for (int i = 1; i &lt;= n; ++i) read(a[i]), mx = max(a[i], mx);
+    for (int i = 1, l, r, x; i &lt;= m; ++i) {
+        read(l, r, x);
+        q[++cnt] = {i, l - 1, x, -1};
+        q[++cnt] = {i, r, x, 1};
+        mx = max(x, mx);
+    }
+
+    sort(q + 1, q + cnt + 1);
+    for (int i = 1, pos = 1; i &lt;= cnt; ++i) {
+        for (; pos &lt;= q[i].k; ++pos) add(a[pos]);
+        ans[q[i].id] += q[i].val * qry(q[i].x);
+    }
+
+    for (int i = 1; i &lt;= m; ++i) print(ans[i]), putc(&#39;\n&#39;);
+    
+    fwrite(obuf, p3 - obuf, 1, stdout);
+    return 0;
+}
+</code></pre>
+<h2 id="莫队">莫队</h2>
+<p>区间询问数字出现次数平方和</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+using ll = long long;
+
+int n, m, k, B, res, ans[50007], a[50007], cnt[50007];
+
+struct Q {
+    int id, l, r;
+    bool operator&lt;(Q x) {
+        return (l / B == x.l / B) ? (r == x.r ? 0 : ((l / B) &amp; 1) ^ (r &lt; x.r)) : l &lt; x.l;
+    }
+} que[50007];
+
+void add(int val) {
+    res -= cnt[val] * cnt[val];
+    ++cnt[val];
+    res += cnt[val] * cnt[val];
+}
+
+void del(int val) {
+    res -= cnt[val] * cnt[val];
+    --cnt[val];
+    res += cnt[val] * cnt[val];
+}
+
+int main() {
+    scanf(&quot;%d %d %d&quot;, &amp;n, &amp;m, &amp;k);
+    B = sqrt(m);
+    for (int i = 1; i &lt;= n; ++i) scanf(&quot;%d&quot;, &amp;a[i]);
+    for (int i = 1; i &lt;= m; ++i) {
+        scanf(&quot;%d %d&quot;, &amp;que[i].l, &amp;que[i].r);
+        que[i].id = i;
+    }
+
+    sort(que + 1, que + m + 1);
+    for (int i = 1, l = 1, r = 0; i &lt;= m; ++i) {
+        while (l &gt; que[i].l) add(a[--l]);
+        while (r &lt; que[i].r) add(a[++r]);
+        while (l &lt; que[i].l) del(a[l++]);
+        while (r &gt; que[i].r) del(a[r--]);
+        ans[que[i].id] = res;
+    }
+
+    for (int i = 1; i &lt;= m; ++i) printf(&quot;%d\n&quot;, ans[i]);
+
+    return 0;
+}
+</code></pre>
+<h2 id="带修莫队">带修莫队</h2>
+<p>单点修改， 询问区间去重后数的个数</p><p>注意块长</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+using ll = long long;
+
+char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf;
+#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
+char obuf[1 &lt;&lt; 20], *O = obuf;
+#define putc(x) *O++ = x
+ll read() {
+    ll x = 0;
+    char c = getc();
+    int f = 0;
+    for (; !isdigit(c); c = getc()) f |= c == &#39;-&#39;;
+    for (; isdigit(c); c = getc()) x = x * 10 + c - &#39;0&#39;;
+    return f ? -x : x;
+}
+
+template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
+template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
+template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if(x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
+template&lt;typename T, typename... Args&gt; inline void print(T x, Args... args) { print(x), print(args...); }
+
+constexpr int N = 2e6 + 7;
+
+int n, m, B;
+
+struct que {
+    int l, r, t, id;
+    bool operator&lt;(que x) {
+        return l / B == x.l / B ? (r / B == x.r / B ? t &lt; x.t : r &lt; x.r) : l &lt; x.l;
+    }
+} q[N];
+
+struct mod {
+    int p, col;
+} c[N];
+
+int a[N], res[N], ans, cnt[N];
+char op[5];
+
+void add(int val) {
+      ans += !cnt[val]++;
+}
+
+void del(int val) {
+    ans -= !--cnt[val];
+}
+
+void modify(int x, int ti) {
+    if (c[ti].p &gt;= q[x].l &amp;&amp; c[ti].p &lt;= q[x].r) {
+          del(a[c[ti].p]);
+        add(c[ti].col);
+    }
+    swap(a[c[ti].p], c[ti].col);
+}
+
+int main() {
+    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+    B = pow(n, 2.0 / 3.0);
+    
+    for (int i = 1; i &lt;= n; ++i) scanf(&quot;%d&quot;, a + i);
+    int tq = 0, tc = 0;
+    for (int i = 1; i &lt;= m; ++i) {
+        scanf(&quot;%s&quot;, op);
+        if (op[0] == &#39;Q&#39;) {
+            ++tq;
+            scanf(&quot;%d %d&quot;, &amp;q[tq].l, &amp;q[tq].r);
+            q[tq].t = tc, q[tq].id = tq;
+        } else {
+            ++tc;
+            scanf(&quot;%d %d&quot;, &amp;c[tc].p, &amp;c[tc].col);
+        }
+    }
+    
+    sort(q + 1, q + tq + 1);
+    for (int i = 1, l = 1, r = 0, ti = 0; i &lt;= tq; ++i) {
+        while (l &gt; q[i].l) add(--l);
+        while (r &lt; q[i].r) add(++r);
+        while (l &lt; q[i].l) del(a[l++]);
+        while (r &gt; q[i].r) del(a[r--]);
+        while (ti &lt; q[i].t) modify(i, ++ti);
+        while (ti &gt; q[i].t) modify(i, ti--);
+        res[q[i].id] = ans;
+    }
+    
+    for (int i = 1; i &lt;= tq; ++i) printf(&quot;%d\n&quot;, res[i]);
+
+    fwrite(obuf, O - obuf, 1, stdout);
+    return 0;
+}
+</code></pre>
+<h2 id="dsu-on-tree">DSU on tree</h2>
+<p>求树上两点之间出现最多的颜色</p><pre><code class="language-cpp">// LUOGU_RID: 130257582
+#include &lt;bits/stdc++.h&gt;
+
+#define int ll
+#define rep(i, a, b) for (int i = (a); i &lt;= (b); ++i)
+#define per(i, a, b) for (int i = (b); i &gt;= (a); ++i)
+#define go(x) for (int i = head[x], tn = e[i].to; i; i = e[i].ne, tn = e[i].to)
+
+using ll = long long;
+
+struct edge {
+    int to, ne;
+};
+
+signed main() {
+    // freopen(&quot;log.txt&quot;, &quot;w&quot;, stderr);
+
+    int n;
+    scanf(&quot;%lld&quot;, &amp;n);
+
+    std::vector&lt;int&gt; col(n + 1, 0);
+    rep (i, 1, n) scanf(&quot;%lld&quot;, &amp;col[i]);
+
+    int _cnt = 0;
+    std::vector&lt;edge&gt; e = {{0, 0}};
+    std::vector&lt;int&gt; head(n + 1, 0);
+    auto add = [&amp;](int x, int y) {
+        e.push_back({y, head[x]}), head[x] = ++_cnt;
+    };
+
+    rep (i, 1, n - 1) {
+        int x, y;
+        scanf(&quot;%lld %lld&quot;, &amp;x, &amp;y);
+        add(x, y), add(y, x);
+    }
+
+    int dfn = 0;
+    std::vector&lt;int&gt; sz(n + 1, 0), son(n + 1, 0);
+    std::vector&lt;int&gt; L(n + 1, 0), R(n + 1, 0), loc(n + 1, 0);
+    auto preDfs = [&amp;](auto self, int x, int fa) -&gt; void {
+        L[x] = ++dfn;
+        loc[dfn] = x;
+        sz[x] = 1;
+        go(x) {
+            if (tn == fa) continue;
+            self(self, tn, x);
+            sz[x] += sz[tn];
+            if (!son[x] || sz[son[x]] &lt; sz[tn]) son[x] = tn;
+        }
+        R[x] = dfn;
+    };
+
+    preDfs(preDfs, 1, -1);
+
+    std::vector&lt;int&gt; cnt(n + 1, 0);
+    std::vector&lt;int&gt; res(n + 1, 0);
+    int ans = 0, mx = 0;
+    auto ad = [&amp;](int u) {
+        ++cnt[col[u]];
+        if (cnt[col[u]] == mx) ans += col[u];
+        else if (cnt[col[u]] &gt; mx)
+            mx = cnt[col[u]], ans = col[u];
+    };
+    auto de = [&amp;](int u) {
+        if (cnt[col[u]] == mx) ans -= col[u];
+        --cnt[col[u]];
+    };
+    auto calc = [&amp;]() {
+        return ans;
+    };
+
+    auto dfs = [&amp;](auto self, int x, int fa, bool ke) -&gt; void {
+        go(x) {
+            if (tn == fa || tn == son[x]) continue;
+            self(self, tn, x, false);
+        }
+
+        if (son[x]) self(self, son[x], x, true);
+        go(x) {
+            if (tn == fa || tn == son[x]) continue;
+            rep (i, L[tn], R[tn]) ad(loc[i]);
+        }
+
+        ad(x);
+        res[x] = calc();
+
+        if (!ke) {
+            rep (i, L[x], R[x]) de(loc[i]);
+            ans = mx = 0;
+        }
+    };
+
+    dfs(dfs, 1, -1, false);
+
+    rep (i, 1, n) printf(&quot;%lld &quot;, res[i]);
+    
+    return 0;
+}
+</code></pre>
+<h2 id="线段树合并">线段树合并</h2>
+<p>给定一棵树，每次操作：给两点之间的所有点的集合加上一个数，或者询问</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+using ll = long long;
+
+struct node {
+    int l, r;
+    int val, id;
+
+    #define l(p) tr[p].l
+    #define r(p) tr[p].r
+    #define val(p) tr[p].val
+    #define id(p) tr[p].id
+} tr[100007 * 300];
+
+int n, m, tot, root[100007];
+
+int insert(int now, int x, int v, int l = 1, int r = 1e5) {
+    int p = ++tot;
+    tr[p] = tr[now];
+    if (l == r) {
+        val(p) += v;
+        id(p) = l;
+        return p;
+    }
+    int mid = l + r &gt;&gt; 1;
+    if (x &lt;= mid) l(p) = insert(l(now), x, v, l, mid);
+    else r(p) = insert(r(now), x, v, mid + 1, r);
+    if (val(l(p)) &gt;= val(r(p))) val(p) = val(l(p)), id(p) = id(l(p));
+    else val(p) = val(r(p)), id(p) = id(r(p));
+    return p;
+}
+
+int merge(int a, int b, int l = 1, int r = 1e5) {
+    if (!a) return b;
+    if (!b) return a;
+    if (l == r) {
+        val(a) += val(b);
+        id(a) = l;
+        return a;
+    }
+    int mid = l + r &gt;&gt; 1;
+    l(a) = merge(l(a), l(b), l, mid);
+    r(a) = merge(r(a), r(b), mid + 1, r);
+    if (val(l(a)) &gt;= val(r(a))) val(a) = val(l(a)), id(a) = id(l(a));
+    else val(a) = val(r(a)), id(a) = id(r(a));
+    return a;
+}
+
+struct edge {
+    int to, ne;
+} e[100007 * 2];
+
+int cnt, dfn, eul[100007 * 2], loc[100007], f[100007], dep[100007], head[100007];
+
+void preDfs(int x, int fa) {
+    eul[++dfn] = x, loc[x] = dfn, f[x] = fa, dep[x] = dep[fa] + 1;
+    for (int i = head[x]; i; i = e[i].ne) {
+        int tn = e[i].to;
+        if (tn == fa) continue;
+        preDfs(tn, x);
+        eul[++dfn] = x;
+    }
+}
+
+int mn[100007 * 8];
+
+void build(int p, int l, int r) {
+    if (l == r) {
+        mn[p] = eul[l];
+        return;
+    }
+    int mid = l + r &gt;&gt; 1;
+    build(p &lt;&lt; 1, l, mid), build(p &lt;&lt; 1 | 1, mid + 1, r);
+    mn[p] = dep[mn[p &lt;&lt; 1]] &lt; dep[mn[p &lt;&lt; 1 | 1]] ? mn[p &lt;&lt; 1] : mn[p &lt;&lt; 1 | 1];
+}
+
+int ask(int l, int r, int p = 1, int L = 1, int R = dfn) {
+    if (L &gt; r || R &lt; l) return -1;
+    if (L &gt;= l &amp;&amp; R &lt;= r) return mn[p];
+    int mid = L + R &gt;&gt; 1;
+    int lans = ask(l, r, p &lt;&lt; 1, L, mid);
+    int rans = ask(l, r, p &lt;&lt; 1 | 1, mid + 1, R);
+    if (lans == -1 || rans == -1) return lans + rans + 1;
+    return dep[lans] &lt; dep[rans] ? lans : rans;
+}
+
+int lca(int x, int y) {
+    int l = loc[x], r = loc[y];
+    if (l &gt; r) swap(l, r);
+    return ask(l, r);
+}
+
+int ans[100007];
+
+void dfs(int x, int fa) {
+    for (int i = head[x]; i; i = e[i].ne) {
+        int tn = e[i].to;
+        if (tn == fa || dep[tn] &lt;= dep[x]) continue;
+        dfs(tn, x);
+        root[x] = merge(root[x], root[tn]);
+    }
+    if (val(root[x])) ans[x] = id(root[x]);
+}
+
+int main() {
+    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+    for (int i = 1, x, y; i &lt; n; ++i) {
+        scanf(&quot;%d %d&quot;, &amp;x, &amp;y);
+        e[++cnt] = {y, head[x]}, head[x] = cnt;
+        e[++cnt] = {x, head[y]}, head[y] = cnt;
+    }
+
+    preDfs(1, 0);
+    build(1, 1, dfn);
+
+    for (int i = 1, x, y, z; i &lt;= m; ++i) {
+        scanf(&quot;%d %d %d&quot;, &amp;x, &amp;y, &amp;z);
+        int lc = lca(x, y);
+        root[x] = insert(root[x], z, 1), root[y] = insert(root[y], z, 1);
+        root[lc] = insert(root[lc], z, -1);
+        if (f[lc]) root[f[lc]] = insert(root[f[lc]], z, -1);
+    }
+
+    dfs(1, 0);
+    for (int i = 1; i &lt;= n; ++i) printf(&quot;%d\n&quot;, ans[i]);
+
+    return 0;
+}
+</code></pre>
+<h1 id="科技">科技</h1>
+<h2 id="集合哈希">集合哈希</h2>
+<p>ha/hb/hc 表示前 k 个元素组成的集合的哈希值</p><pre><code class="language-cpp">struct randomhash {
+     static uint64_t splitmix64(uint64_t x) {
+        x += 0x9e3779b97f4a7c15;  
+        x = (x ^ (x &gt;&gt; 30)) * 0xbf58476d1ce4e5b9;
+        x = (x ^ (x &gt;&gt; 27)) * 0x94d049bb133111eb;
+        return x ^ (x &gt;&gt; 31);
+    }
+    size_t operator()(uint64_t x) const {
+        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+        return splitmix64(x + FIXED_RANDOM);
+    }
+};
+
+class SetHasher {
+    unordered_map&lt;int, ull, randomhash&gt; elemHash;
+    mt19937_64 rng;
+    public:
+        SetHasher():rng(chrono::steady_clock::now().time_since_epoch().count()) {}
+        ull getelemhash(const int &amp;elem) {
+            if (!elemHash.count(elem)) {
+                elemHash[elem] = rng();
+            }
+            return elemHash[elem];
+        }
+        ull computexorhash(const vector&lt;int&gt; &amp;elem) {
+            ull x = 0;
+            for (const auto &amp;e: elem) {
+                x ^= getelemhash(e);
+            }
+            return x;
+        }
+        ull add(ull curhash, const int &amp;elem) {
+            return curhash ^ getelemhash(elem);
+        }
+};
+
+void solve(){
+    SetHasher sh;
+    int n; cin &gt;&gt; n;
+    vector&lt;int&gt; a(n + 1, 0), b(n + 1, 0), c(n + 1,0);
+    vector&lt;int&gt; ma, mb, mc;
+    ma.reserve(n);
+    mb.reserve(n);
+    mc.reserve(n);
+    for (int i = 1; i &lt;= n; i++) cin &gt;&gt; a[i];
+    for (int i = 1; i &lt;= n; i++) cin &gt;&gt; b[i];
+    for (int i = 1; i &lt;= n; i++) cin &gt;&gt; c[i];
+    int cnt = 0;
+    ull ha = 0, hb = 0, hc = 0;
+    for (int i = 1; i &lt;= n; i++){
+        ha = sh.add(ha, a[i]);
+        hb = sh.add(hb, b[i]);
+        hc = sh.add(hc, c[i]);
+        if(ha == hb || ha == hc || hb == hc){
+            cnt++;
+        }
+    }
+    cout &lt;&lt; cnt &lt;&lt; &#39;\n&#39;;
+}
+</code></pre>
+<h2 id="防卡-unordered_map">防卡 unordered_map</h2>
+<pre><code class="language-cpp">struct custom_hash {
+    static uint64_t splitmix64(uint64_t x) {
+        // http://xorshift.di.unimi.it/splitmix64.c
+        x += 0x9e3779b97f4a7c15;
+        x = (x ^ (x &gt;&gt; 30)) * 0xbf58476d1ce4e5b9;
+        x = (x ^ (x &gt;&gt; 27)) * 0x94d049bb133111eb;
+        return x ^ (x &gt;&gt; 31);
+    }
+
+    size_t operator()(uint64_t x) const {
+        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+        return splitmix64(x + FIXED_RANDOM);
+    }
+};
+
+unordered_map&lt;long long, int, custom_hash&gt; safe_map;
+gp_hash_table&lt;long long, int, custom_hash&gt; safe_hash_table;
+</code></pre>
+<h2 id="区间最远互质点对">区间最远互质点对</h2>
+<pre><code class="language-cpp">for (ll len = r - l; len &gt;= 0; --len) 
+    for (ll i = l; i &lt;= r - len; ++i)
+        if (__gcd(i, i + len) == 1)
+</code></pre>
+
+            ]]>
+        </content>
+    </entry>
     <entry>
         <title>ICPC 2026 Nanchang Mirror A-C H J</title>
         <author>
