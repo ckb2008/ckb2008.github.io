@@ -3,7 +3,7 @@
     <title>芋艿酱的小窝</title>
     <link href="https://ckb2008.github.io/feed.xml" rel="self" />
     <link href="https://ckb2008.github.io" />
-    <updated>2026-11-23T08:38:42+08:00</updated>
+    <updated>2026-11-23T17:38:19+08:00</updated>
     <author>
         <name>ckbYuina</name>
     </author>
@@ -1395,7 +1395,7 @@ void solve(){
         ha = sh.add(ha, a[i]);
         hb = sh.add(hb, b[i]);
         hc = sh.add(hc, c[i]);
-        if(ha == hb || ha == hc || hb == hc){
+        if (ha == hb || ha == hc || hb == hc){
             cnt++;
         }
     }
