@@ -3,7 +3,7 @@
     <title>芋艿酱的小窝</title>
     <link href="https://ckb2008.github.io/feed.xml" rel="self" />
     <link href="https://ckb2008.github.io" />
-    <updated>2026-11-24T00:48:07+08:00</updated>
+    <updated>2026-11-24T01:08:17+08:00</updated>
     <author>
         <name>ckbYuina</name>
     </author>
@@ -65,194 +65,97 @@ int main() {
 </code></pre>
 <h2 id="数学">数学</h2>
 <h3 id="高斯消元-1">高斯消元 1</h3>
-<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-using ll = long long;
+<pre><code class="language-cpp">
+// main:
+// input
+for (int i = 1; i &lt;= n; ++i) {
+    int p = i;
+    for (int j = i + 1; j &lt;= n; ++j) {
+        if (abs(f[p])) p = j;
+    }
+    if (p != i) {
+        for (int j = 1; j &lt;= n; ++j) swap(a[p][i], a[i][j]);
+        swap(f[i], f[p]);
+    }
 
-#define dbg(x...) fprintf(stderr, x);
+    for (int j = 1; j &lt;= n; ++j) {
+        if (i == j) continue;
+        double d = a[j][i] / a[i][i];
+        for (int k = 1; k &lt;= n; ++k) {
+            a[j][k] -= a[i][k] * d;
+        }
+        f[j] -= f[i] * d;
+    }
+}    
 
-char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf, obuf[1 &lt;&lt; 20], *p3 = obuf;
-#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
-#define putc(x) (p3 - obuf &lt; (1 &lt;&lt; 20) ? (*p3++ = x) : (fwrite(obuf, p3 - obuf, 1, stdout), p3 = obuf, *p3++=x))
-inline ll read() {
-    ll x = 0, sgn = 0; char s = getc();
-    while(!isdigit(s)) sgn |= s == &#39;-&#39;, s = getc();
-    while(isdigit(s)) x = x * 10 + s - &#39;0&#39;, s = getc();
-    return sgn ? -x : x;
+bool fl = 0;
+for (int i = 1; i &lt;= n; ++i) {
+    int cnt = 0;
+    for (int j = 1; j &lt;= n; ++j) {
+            cnt += abs(a[i][j]]) &gt; eps;
+    }
+    if (cnt != 1) fl = 1;
+    if (a[i][i]) f[i] /= a[i][i];
 }
 
-template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
-template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
-template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if (x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
-template&lt;typename T, typename... Args&gt; inline void print(char c, T x, Args... args) { print(x), putc(c), print(args...); }
-
-constexpr int N = 107;
-constexpr double eps = 1e-7;
-
-int n;
-double a[N][N], f[N];
-
-int main() {
-    scanf(&quot;%d&quot;, &amp;n);
+if (fl) {
+    puts(&quot;No Solution&quot;);
+} else {
     for (int i = 1; i &lt;= n; ++i) {
-        for (int j = 1; j &lt;= n; ++j) {
-            scanf(&quot;%lf&quot;, &amp;a[i][j]);
-        }
-        scanf(&quot;%lf&quot;, f + i);
+        printf(&quot;%.2lf\n&quot;, f[i]);
     }
-
-    for (int i = 1; i &lt;= n; ++i) {
-        int p = i;
-        for (int j = i + 1; j &lt;= n; ++j) {
-            if (abs(f[p])) p = j;
-        }
-        if (p != i) {
-            for (int j = 1; j &lt;= n; ++j) swap(a[p][i], a[i][j]);
-            swap(f[i], f[p]);
-        }
-
-        for (int j = 1; j &lt;= n; ++j) {
-            if (i == j) continue;
-            double d = a[j][i] / a[i][i];
-            for (int k = 1; k &lt;= n; ++k) {
-                a[j][k] -= a[i][k] * d;
-            }
-            f[j] -= f[i] * d;
-        }
-    }    
-
-    bool fl = 0;
-    for (int i = 1; i &lt;= n; ++i) {
-        int cnt = 0;
-        for (int j = 1; j &lt;= n; ++j) {
-             cnt += abs(a[i][j]]) &gt; eps;
-        }
-        if (cnt != 1) fl = 1;
-        if (a[i][i]) f[i] /= a[i][i];
-    }
-
-    if (fl) {
-        puts(&quot;No Solution&quot;);
-    } else {
-        for (int i = 1; i &lt;= n; ++i) {
-            printf(&quot;%.2lf\n&quot;, f[i]);
-        }
-    }
-    
-    fwrite(obuf, p3 - obuf, 1, stdout);
-    return 0;
 }
 </code></pre>
 <h3 id="高斯消元-2">高斯消元 2</h3>
-<p><code>fl = 0</code> 无数解，<code>fl = -1</code> 无解。</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-using ll = long long;
-
-#define dbg(x...) fprintf(stderr, x);
-
-char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf, obuf[1 &lt;&lt; 20], *p3 = obuf;
-#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
-#define putc(x) (p3 - obuf &lt; (1 &lt;&lt; 20) ? (*p3++ = x) : (fwrite(obuf, p3 - obuf, 1, stdout), p3 = obuf, *p3++=x))
-inline ll read() {
-    ll x = 0, sgn = 0; char s = getc();
-    while(!isdigit(s)) sgn |= s == &#39;-&#39;, s = getc();
-    while(isdigit(s)) x = x * 10 + s - &#39;0&#39;, s = getc();
-    return sgn ? -x : x;
-}
-
-template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
-template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
-template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if (x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
-template&lt;typename T, typename... Args&gt; inline void print(char c, T x, Args... args) { print(x), putc(c), print(args...); }
-
-constexpr int N = 107;
-constexpr double eps = 1e-7;
-
-int n;
+<p><code>fl = 0</code> 无数解，<code>fl = -1</code> 无解。</p><pre><code class="language-cpp">int n;
 double a[N][N], f[N];
 
-int main() {
-    scanf(&quot;%d&quot;, &amp;n);
-    for (int i = 1; i &lt;= n; ++i) {
-        for (int j = 1; j &lt;= n; ++j) {
-            scanf(&quot;%lf&quot;, &amp;a[i][j]);
-        }
-        scanf(&quot;%lf&quot;, f + i);
-    }
-
-    for (int i = 1; i &lt;= n; ++i) {
-        int p = i;
-        for (int j = 1; j &lt;= n; ++j) {
-            if (abs(a[j][j]) &gt; eps &amp;&amp; j &lt; i) continue;
-            if (abs(a[j][i]) &gt; abs(a[p][i])) {
-                p = j;
-            }
-        }
-        for (int j = 1; j &lt;= n; ++j) {
-            swap(a[p][j], a[i][j]);
-        }
-        swap(f[i], f[p]);
-        if (abs(a[i][i]) &lt;= eps) continue;
-
-        for (int j = 1; j &lt;= n; ++j) {
-            if (i == j) continue;
-            double d = a[j][i] / a[i][i];
-            for (int k = 1; k &lt;= n; ++k) {
-                a[j][k] -= a[i][k] * d;
-            }
-            f[j] -= f[i] * d;
-        }
-    }    
-
-    int fl = 1;
-    for (int i = 1; i &lt;= n; ++i) {
-        if (abs(a[i][i]) &lt;= eps) {
-            if (abs(f[i]) &gt; eps) {
-                fl = -1;
-            } else if (fl != -1) {
-                fl = 0;
-            }
+// main: 
+// input
+for (int i = 1; i &lt;= n; ++i) {
+    int p = i;
+    for (int j = 1; j &lt;= n; ++j) {
+        if (abs(a[j][j]) &gt; eps &amp;&amp; j &lt; i) continue;
+        if (abs(a[j][i]) &gt; abs(a[p][i])) {
+            p = j;
         }
     }
+    for (int j = 1; j &lt;= n; ++j) {
+        swap(a[p][j], a[i][j]);
+    }
+    swap(f[i], f[p]);
+    if (abs(a[i][i]) &lt;= eps) continue;
 
-    if (fl &lt; 1) printf(&quot;%d&quot;, fl);
-    else {
-        for (int i = 1; i &lt;= n; ++i) {
-            printf(&quot;x%d=%.2lf\n&quot;, i, abs(f[i] / a[i][i]) &lt;= eps ? 0 : f[i] / a[i][i]);
+    for (int j = 1; j &lt;= n; ++j) {
+        if (i == j) continue;
+        double d = a[j][i] / a[i][i];
+        for (int k = 1; k &lt;= n; ++k) {
+            a[j][k] -= a[i][k] * d;
+        }
+        f[j] -= f[i] * d;
+    }
+}    
+
+int fl = 1;
+for (int i = 1; i &lt;= n; ++i) {
+    if (abs(a[i][i]) &lt;= eps) {
+        if (abs(f[i]) &gt; eps) {
+            fl = -1;
+        } else if (fl != -1) {
+            fl = 0;
         }
     }
-    
-    fwrite(obuf, p3 - obuf, 1, stdout);
-    return 0;
+}
+
+if (fl &lt; 1) printf(&quot;%d&quot;, fl);
+else {
+    for (int i = 1; i &lt;= n; ++i) {
+        printf(&quot;x%d=%.2lf\n&quot;, i, abs(f[i] / a[i][i]) &lt;= eps ? 0 : f[i] / a[i][i]);
+    }
 }
 </code></pre>
 <h3 id="矩阵求逆">矩阵求逆</h3>
-<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-#define int ll
-using namespace std;
-using ll = long long;
-
-#define dbg(x...) fprintf(stderr, x);
-
-char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf, obuf[1 &lt;&lt; 20], *p3 = obuf;
-#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
-#define putc(x) (p3 - obuf &lt; (1 &lt;&lt; 20) ? (*p3++ = x) : (fwrite(obuf, p3 - obuf, 1, stdout), p3 = obuf, *p3++=x))
-inline ll read() {
-    ll x = 0, sgn = 0; char s = getc();
-    while(!isdigit(s)) sgn |= s == &#39;-&#39;, s = getc();
-    while(isdigit(s)) x = x * 10 + s - &#39;0&#39;, s = getc();
-    return sgn ? -x : x;
-}
-
-template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
-template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
-template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if (x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
-template&lt;typename T, typename... Args&gt; inline void print(char c, T x, Args... args) { print(x), putc(c), print(args...); }
-
-constexpr int N = 407;
-constexpr int mod = 1e9 + 7;
-
-int qinv(int a, int b = mod - 2) {
+<pre><code class="language-cpp">int qinv(int a, int b = mod - 2) {
     int res = 1;
     for (; b; b &gt;&gt;= 1) {
         if (b &amp; 1) {
@@ -265,62 +168,58 @@ int qinv(int a, int b = mod - 2) {
 
 int n, a[N][N &lt;&lt; 1];
 
-signed main() {
-    read(n);
-    for (int i = 1; i &lt;= n; ++i) {
-        for (int j = 1; j &lt;= n; ++j) {
-            read(a[i][j]);
-        }
-        a[i][n + i] = 1;
+// main:
+read(n);
+for (int i = 1; i &lt;= n; ++i) {
+    for (int j = 1; j &lt;= n; ++j) {
+        read(a[i][j]);
     }
+    a[i][n + i] = 1;
+}
 
-    int fl = 1;
-    for (int i = 1; i &lt;= n; ++i) {
-        int p = i;
-        for (int j = i + 1; j &lt;= n; ++j) {
-            if (a[p][i] &lt; a[j][i]) {
-                p = j;
-            }
-        }
-
-        if (p != i) {
-            swap(a[i], a[p]);
-        }
-
-        if (!a[i][i]) {
-            fl = 0;
-            break;
-        }
-        
-        int inv = qinv(a[i][i]);
-        for (int k = 1; k &lt;= n; ++k) {
-            if (i == k) {
-                continue;
-            }
-            int d = a[k][i] * inv % mod;
-            for (int j = i; j &lt;= n * 2; ++j) {
-                a[k][j] = ((a[k][j] - d * a[i][j]) % mod + mod) % mod;
-            }
-        }
-
-        for (int j = 1; j &lt;= n * 2; ++j) {
-            a[i][j] = a[i][j] * inv % mod;
+int fl = 1;
+for (int i = 1; i &lt;= n; ++i) {
+    int p = i;
+    for (int j = i + 1; j &lt;= n; ++j) {
+        if (a[p][i] &lt; a[j][i]) {
+            p = j;
         }
     }
 
-    if (!fl) {
-        puts(&quot;No Solution&quot;);
-    } else {
-        for (int i = 1; i &lt;= n; ++i) {
-            for (int j = 1; j &lt;= n; ++j) {
-                print(a[i][n + j]), putc(&#39; &#39;);
-            }
-            putc(&#39;\n&#39;);
-        }
+    if (p != i) {
+        swap(a[i], a[p]);
+    }
+
+    if (!a[i][i]) {
+        fl = 0;
+        break;
     }
     
-    fwrite(obuf, p3 - obuf, 1, stdout);
-    return 0;
+    int inv = qinv(a[i][i]);
+    for (int k = 1; k &lt;= n; ++k) {
+        if (i == k) {
+            continue;
+        }
+        int d = a[k][i] * inv % mod;
+        for (int j = i; j &lt;= n * 2; ++j) {
+            a[k][j] = ((a[k][j] - d * a[i][j]) % mod + mod) % mod;
+        }
+    }
+
+    for (int j = 1; j &lt;= n * 2; ++j) {
+        a[i][j] = a[i][j] * inv % mod;
+    }
+}
+
+if (!fl) {
+    puts(&quot;No Solution&quot;);
+} else {
+    for (int i = 1; i &lt;= n; ++i) {
+        for (int j = 1; j &lt;= n; ++j) {
+            print(a[i][n + j]), putc(&#39; &#39;);
+        }
+        putc(&#39;\n&#39;);
+    }
 }
 </code></pre>
 <h3 id="二元一次不定方程">二元一次不定方程</h3>
@@ -331,46 +230,7 @@ signed main() {
 }
 </code></pre>
 <h3 id="离散对数">离散对数</h3>
-<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-#define int ll
-using namespace std;
-using ll = long long;
-
-#define dbg(x...) fprintf(stderr, x);
-
-char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf, obuf[1 &lt;&lt; 20], *p3 = obuf;
-#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
-#define putc(x) (p3 - obuf &lt; (1 &lt;&lt; 20) ? (*p3++ = x) : (fwrite(obuf, p3 - obuf, 1, stdout), p3 = obuf, *p3++=x))
-inline ll read() {
-    ll x = 0, sgn = 0; char s = getc();
-    while(!isdigit(s)) sgn |= s == &#39;-&#39;, s = getc();
-    while(isdigit(s)) x = x * 10 + s - &#39;0&#39;, s = getc();
-    return sgn ? -x : x;
-}
-
-template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
-template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
-template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if (x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
-template&lt;typename T, typename... Args&gt; inline void print(char c, T x, Args... args) { print(x), putc(c), print(args...); }
-
-ll qpow(ll a, ll b, ll p) {
-    int res = 1;
-    for (; b; b &gt;&gt;= 1) {
-        if (b &amp; 1) {
-            res = res * a % p;
-        }
-        a = a * a % p;
-    }
-    return res;
-}
-
-ll exgcd(ll a, ll b, ll&amp; x, ll&amp; y) {
-    if (!b) return x = 1, y = 0, a;
-    ll g = exgcd(b, a % b, y, x);
-    return y = y - a / b * x, g;
-}
-
-ll inv(ll a, ll p) {
+<pre><code class="language-cpp">ll inv(ll a, ll p) {
     ll x, y;
     exgcd(a, p, x, y);
     return (x % p + p) % p;
@@ -426,132 +286,18 @@ ll exbsgs(ll a, ll b, ll p) {
     ll ans = bsgs(a, b * inv(val, p) % p, p);
     return ans == -1 ? -1 : ans + k;
 }
-
-char c[17] = &quot;No Solution\0&quot;;
-
-signed main() {
-    while (1) {
-        ll a, b, p;
-        read(a, p, b);
-        if (!a) {
-            break;
-        }
-        ll res = exbsgs(a, b, p);
-        if (res == -1) {
-            for (int i = 0; c[i]; ++i) putc(c[i]);
-        } else {
-            print(res);
-        }
-        putc(&#39;\n&#39;);
-    }
-    
-    fwrite(obuf, p3 - obuf, 1, stdout);
-    return 0;
-}
 </code></pre>
 <h3 id="中国剩余定理">中国剩余定理</h3>
-<p>要求模数互质</p><pre><code class="language-cpp">// P1495 【模板】中国剩余定理（CRT）/ 曹冲养猪
-// 125 MB 1000 ms
-
-#include &lt;bits/stdc++.h&gt;
-
-#define rep(i, a, b) for (int i = (a); i &lt;= (b); ++i)
-#define per(i, a, b) for (int i = (a); i &gt;= (b); --i)
-#define mst(a, k) memset(a, k, sizeof a)
-#define minv(a, b) a = min(a, b)
-#define maxv(a, b) a = max(a, b)
-
-#define gcd(a, b) __gcd((ll)a, (ll)b)
-#define lcm(a, b) (a / gcd(a, b) * b)
-
-#define gc(x) getchar(x)
-#define pc(x) putchar(x)
-#define put(x) printf(&quot;%d\n&quot;, x)
-#define putl(x) printf(&quot;%lld\n&quot;, x)
-#define mts() int t; scanf(&quot;%d&quot;, &amp;t); while (t--) solve()
-
-#define dbg(x...) fprintf(stderr, x)
-#define dbgv(a, l, r) rep (i, l, r) fprintf(stderr, &quot;%lld&quot;, (ll)a[i])
-
-#define inf 0x3f3f3f3f
-#define infl ((ll)1e18)
-
-using namespace std;
-using db = double;
-using ll = __int128;
-using ull = unsigned long long;
-
-template&lt;int size = 1 &lt;&lt; 20&gt;
-struct IO {
-    char in[size], out[size], *p1, *p2, *pp;
-    IO() : p1(in), p2(in), pp(out) {}
-    ~IO() { fwrite(out, 1, pp - out, stdout); }
-    inline char gc() { if (p1 == p2) p2 = (p1 = in) + fread(in, 1, size, stdin); return p1 == p2 ? &#39; &#39; : *p1++; }
-    inline bool blank(char ch) { return ch == &#39; &#39; || ch == &#39;\n&#39; || ch == &#39;\r&#39; || ch == &#39;\t&#39;; }
-    template&lt;class T&gt; inline void read(T&amp; x) { double tmp = 1; bool sign = 0; x = 0; char ch = gc(); for (; !isdigit(ch); ch = gc()) sign |= ch == 45; for (; isdigit(ch); ch = gc()) x = x * 10 + ch - 48; if (ch == &#39;.&#39;) for (ch = gc(); isdigit(ch); ch = gc()) tmp /= 10.0, x += tmp * (ch - &#39;0&#39;); if (sign) x = -x; }
-    inline void read(char&amp; c) { while (!blank(c)) c = gc(); }
-    template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
-    inline void push(const char&amp; c) { if (pp - out == size) fwrite(out, 1, size, stdout), pp = out; *pp++ = c; }
-    inline void write(char c) { push(c); }
-    template&lt;class T&gt;
-    inline void write(T x) { if (x &lt; 0) x = -x, push(&#39;-&#39;); static T sta[35]; T top = 0; do sta[top++] = x % 10, x /= 10; while (x); while (top) push(sta[--top] + &#39;0&#39;); }
-    template&lt;class T&gt; inline void write(T x, char c) { write(x), push(c); }
-    template&lt;typename T, typename... Args&gt; inline void write(const T x, const Args... args) { write(x), write(args...); }
-};
-IO&lt;&gt; io;
-
-struct dsu {
-    vector&lt;int&gt; f;
-    dsu(int n) { f.resize(n + 1); iota(f.begin() + 1, f.end(), 1); }
-    int find(int x) { return x == f[x] ? x : f[x] = find(f[x]); }
-    bool merge(int x, int y) {
-        x = find(x), y = find(y);
-        return x == y ? 0 : f[x] = y, 1;
-    }
-    void clear() { iota(f.begin(), f.end(), 1); }
-};
-
-struct bit {
-    int n;
-    vector&lt;ll&gt; c;
-    bit(int x) : c(n + 1) { n = x; }
-    void add(int x, ll y) {
-        for (; x &lt;= n; x += (x &amp; -x)) c[x] += y;
-    }
-    ll _ask(int x) {
-        ll ans = 0;
-        for (; x; x -= (x &amp; -x)) ans += c[x];
-        return ans;
-    }
-    ll ask(int l, int r) { return _ask(r) - _ask(l - 1); }
-};
-
-ll exgcd(ll a, ll b, ll&amp; x, ll&amp; y) {
-    if (!b) return x = 1, y = 0, a;
-    ll g = exgcd(b, a % b, y, x);
-    return y = y - a / b * x, g;
+<p>要求模数互质</p><pre><code class="language-cpp">// main:
+// input
+ll M = 1, ans = 0;
+rep (i, 1, n) M *= a[i];
+rep (i, 1, n) {
+    ll m = M / a[i], B, y;
+    exgcd(m, a[i], B, y);
+    ans = (ans + b[i] * m * B % M) % M;
 }
-
-constexpr int N = 1e5 + 7;
-
-ll n, a[N], b[N];
-
-int main() {
-    // mts();
-    io.read(n);
-    rep (i, 1, n) io.read(a[i], b[i]);
-    
-    ll M = 1, ans = 0;
-    rep (i, 1, n) M *= a[i];
-    rep (i, 1, n) {
-        ll m = M / a[i], B, y;
-        exgcd(m, a[i], B, y);
-        ans = (ans + b[i] * m * B % M) % M;
-    }
-    io.write((ans % M + M) % M);
-    
-    return 0;
-}
+io.write((ans % M + M) % M);
 </code></pre>
 <h2 id="字符串">字符串</h2>
 <h3 id="trie">Trie</h3>
@@ -623,29 +369,7 @@ int main() {
 } 
 </code></pre>
 <h3 id="01trie">01Trie</h3>
-<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-#define int ll
-using namespace std;
-using ll = long long;
-
-char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf;
-#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
-#define putc(x) putchar_unlocked(x)
-inline ll read() {
-    ll x = 0, sgn = 0; char s = getc();
-    while(!isdigit(s)) sgn |= s == &#39;-&#39;, s = getc();
-    while(isdigit(s)) x = x * 10 + s - &#39;0&#39;, s = getc();
-    return sgn ? -x : x;
-}
-
-template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
-template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
-template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if (x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
-template&lt;typename T, typename... Args&gt; inline void print(T x, Args... args) { print(x), print(args...); }
-
-constexpr int N = 3e5 + 7;
-
-int n;
+<pre><code class="language-cpp">int n;
 struct edge {
     int to, ne, w;
 } e[N &lt;&lt; 1];
@@ -699,70 +423,44 @@ signed main() {
 }
 </code></pre>
 <h3 id="kmp">KMP</h3>
-<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-
-using ll = long long;
-
-constexpr int N = 1e6 + 7;
-
-char a[N], b[N];
-
-auto main()-&gt;int {
-    #ifndef fastio
-        std::cin.tie(nullptr)-&gt;sync_with_stdio(false);
-    #endif
-    
-    // freopen(&quot;log.txt&quot;, &quot;w&quot;, stderr);
-
-    scanf(&quot;%s\n%s&quot;, a + 1, b + 1);
-
-    int n = strlen(a + 1), m = strlen(b + 1);
-    std::vector&lt;int&gt; ne(m + 1, 0);
-    for (int i = 2, j = 0; i &lt;= m; ++i) {
-        while (j &amp;&amp; b[i] != b[j + 1]) {
-            j = ne[j];
-        }
-        if (b[i] == b[j + 1]) {
-            ++j;
-        }
-        ne[i] = j;
+<pre><code class="language-cpp">// main:
+// input
+for (int i = 2, j = 0; i &lt;= m; ++i) {
+    while (j &amp;&amp; b[i] != b[j + 1]) {
+        j = ne[j];
     }
-
-    std::vector&lt;int&gt; f(n + 1, 0);
-    for (int i = 1, j = 0; i &lt;= n; ++i) {
-        while (j &amp;&amp; a[i] != b[j + 1]) {
-            j = ne[j];
-        }
-        if (a[i] == b[j + 1]) {
-            ++j;
-        }
-        f[i] = j;
-        if (f[i] == m) {
-            j = ne[j];
-        }
+    if (b[i] == b[j + 1]) {
+        ++j;
     }
+    ne[i] = j;
+}
 
-    for (int i = 1; i &lt;= n; ++i) {
-        if (f[i] == m) {
-            printf(&quot;%d\n&quot;, i - m + 1);
-        }
+std::vector&lt;int&gt; f(n + 1, 0);
+for (int i = 1, j = 0; i &lt;= n; ++i) {
+    while (j &amp;&amp; a[i] != b[j + 1]) {
+        j = ne[j];
     }
+    if (a[i] == b[j + 1]) {
+        ++j;
+    }
+    f[i] = j;
+    if (f[i] == m) {
+        j = ne[j];
+    }
+}
 
-    for (int i = 1; i &lt;= m; ++i) {
-        printf(&quot;%d &quot;, ne[i]);
+for (int i = 1; i &lt;= n; ++i) {
+    if (f[i] == m) {
+        printf(&quot;%d\n&quot;, i - m + 1);
     }
-    
-    return 0;
+}
+
+for (int i = 1; i &lt;= m; ++i) {
+    printf(&quot;%d &quot;, ne[i]);
 }
 </code></pre>
 <h3 id="manacher">Manacher</h3>
-<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-
-using ll = long long;
-
-constexpr int N = 1.1e7 + 7;
-
-char s[N &lt;&lt; 1];
+<pre><code class="language-cpp">char s[N &lt;&lt; 1];
 int p[N &lt;&lt; 1], cnt = 1, ans;
 
 void read() {
@@ -794,7 +492,7 @@ int main() {
 </code></pre>
 <h2 id="图论">图论</h2>
 <h3 id="spfa-判负环">SPFA 判负环</h3>
-<pre><code class="language-cpp">bool spfa() {
+<p>差分约束系统：如果 $x_i - x_j \leq d$，那么 <code>add(i, j, d)</code></p><pre><code class="language-cpp">bool spfa() {
     for (int _ = 1; _ &lt;= n; ++_) {
         bool fl = 0;
         for (int x = 1; x &lt;= n; ++x) {
@@ -817,30 +515,55 @@ int main() {
     return 1;
 }
 </code></pre>
-<h3 id="tarjan缩点">Tarjan缩点</h3>
-<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-using ll = long long;
+<h3 id="tarjan-割点">Tarjan 割点</h3>
+<p>割点：删去后原连通图不连通</p><pre><code class="language-cpp">int n, m;
+vector&lt;int&gt; g[N];
 
-ll read() {
-    ll x = 0;
-    #define gc getchar
-    char c = getchar();
-    int f = 0;
-    for (; !isdigit(c); c = getchar()) f |= c == &#39;-&#39;;
-    for (; isdigit(c); c = getchar()) x = x * 10 + c - &#39;0&#39;;
-    #undef gc
-    return f ? -x : x;
+int low[N], dfn[N], cnt, st[N], deg[N], tp, tot;
+vector&lt;int&gt; vdcc[N];
+void tarjan(int x) {
+    low[x] = dfn[x] = ++cnt, st[++tp] = x;
+    for (auto tn : g[x]) {
+        if (!dfn[tn]) {
+            tarjan(tn);
+            low[x] = min(low[x], low[tn]);
+            if (low[tn] &gt;= dfn[x]) {
+                ++tot;
+                vdcc[tot].push_back(x);
+                ++deg[x];
+                int u;
+                do {
+                    u = st[tp--];
+                    vdcc[tot].push_back(u);
+                    ++deg[u];
+                } while (u != tn);
+            }
+        } else low[x] = min(low[x], dfn[tn]);
+    } 
 }
 
-template&lt;typename T&gt; void read(T&amp; x) { x = read(); }
+int main() {
+    read(n, m);
+    for (int i = 1; i &lt;= m; ++i) {
+        int x, y;
+        read(x, y);
+        g[x].push_back(y);
+        g[y].push_back(x);
+    }
+    
+    for (int i = 1; i &lt;= n; ++i) if (!dfn[i]) tarjan(i), tp = 0;
+    
+    int ans = 0;
+    for (int i = 1; i &lt;= n; ++i) ans += deg[i] &gt; 1;
+    print(ans), putc(&#39;\n&#39;);
+    for (int i = 1; i &lt;= n; ++i) if (deg[i] &gt; 1) print(i), putc(&#39; &#39;);
 
-template&lt;typename T, typename... Args&gt; void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
-
-constexpr int N = 1e4 + 7;
-constexpr int M = 1e5 + 7;
-
-int n, m;
+    fwrite(obuf, O - obuf, 1, stdout);
+    return 0;
+}
+</code></pre>
+<h3 id="tarjan-缩点">Tarjan 缩点</h3>
+<pre><code class="language-cpp">int n, m;
 
 struct edge {
     int fr, to, ne;
@@ -973,12 +696,7 @@ ll ask(int l, int r) {
 }
 </code></pre>
 <h3 id="树链剖分">树链剖分</h3>
-<p>如果需要边权转点权：<code>a[tn] = w</code> 询问的最后一行改成 <code>query(1, 1, tot, loc[x] + 1, loc[y])</code></p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-#define int ll
-using namespace std;
-using ll = long long;
-
-int n, m, r, P, a[100007];
+<p>如果需要边权转点权：<code>a[tn] = w</code> 询问的最后一行改成 <code>query(1, 1, tot, loc[x] + 1, loc[y])</code></p><pre><code class="language-cpp">int n, m, r, P, a[100007];
 
 struct edge{
     int to, ne;
@@ -1125,28 +843,7 @@ signed main() {
 } 
 </code></pre>
 <h3 id="离散二维数点">离散二维数点</h3>
-<p>求序列的区间 <code>[l, r]</code> 内小于等于 <code>x</code> 的数的个数</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-using ll = long long;
-
-char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf, obuf[1 &lt;&lt; 20], *p3 = obuf;
-#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
-#define putc(x) (p3 - obuf &lt; (1 &lt;&lt; 20) ? (*p3++ = x) : (fwrite(obuf, p3 - obuf, 1, stdout), p3 = obuf, *p3++=x))
-inline ll read() {
-    ll x = 0, sgn = 0; char s = getc();
-    while(!isdigit(s)) sgn |= s == &#39;-&#39;, s = getc();
-    while(isdigit(s)) x = x * 10 + s - &#39;0&#39;, s = getc();
-    return sgn ? -x : x;
-}
-
-template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
-template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
-template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if (x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
-template&lt;typename T, typename... Args&gt; inline void print(T x, Args... args) { print(x), print(args...); }
-
-constexpr int N = 2e6 + 7;
-
-struct qq {
+<p>求序列的区间 <code>[l, r]</code> 内小于等于 <code>x</code> 的数的个数</p><pre><code class="language-cpp">struct qq {
     int id, k, x, val;
     bool operator&lt;(qq r) const { return k &lt; r.k; }
 } q[N &lt;&lt; 1];
@@ -1186,11 +883,7 @@ int main() {
 }
 </code></pre>
 <h3 id="莫队">莫队</h3>
-<p>区间询问数字出现次数平方和</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-using ll = long long;
-
-int n, m, k, B, res, ans[50007], a[50007], cnt[50007];
+<p>区间询问数字出现次数平方和</p><pre><code class="language-cpp">int n, m, k, B, res, ans[50007], a[50007], cnt[50007];
 
 struct Q {
     int id, l, r;
@@ -1235,31 +928,7 @@ int main() {
 }
 </code></pre>
 <h3 id="带修莫队">带修莫队</h3>
-<p>单点修改， 询问区间去重后数的个数</p><p>注意块长</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-using ll = long long;
-
-char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf;
-#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
-char obuf[1 &lt;&lt; 20], *O = obuf;
-#define putc(x) *O++ = x
-ll read() {
-    ll x = 0;
-    char c = getc();
-    int f = 0;
-    for (; !isdigit(c); c = getc()) f |= c == &#39;-&#39;;
-    for (; isdigit(c); c = getc()) x = x * 10 + c - &#39;0&#39;;
-    return f ? -x : x;
-}
-
-template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
-template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
-template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if(x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
-template&lt;typename T, typename... Args&gt; inline void print(T x, Args... args) { print(x), print(args...); }
-
-constexpr int N = 2e6 + 7;
-
-int n, m, B;
+<p>单点修改， 询问区间去重后数的个数</p><p>注意块长</p><pre><code class="language-cpp">int n, m, B;
 
 struct que {
     int l, r, t, id;
@@ -1327,11 +996,7 @@ int main() {
 }
 </code></pre>
 <h3 id="dsu-on-tree">DSU on tree</h3>
-<p>求树上两点之间出现最多的颜色</p><pre><code class="language-cpp">// LUOGU_RID: 130257582
-#include &lt;bits/stdc++.h&gt;
-
-#define int ll
-#define rep(i, a, b) for (int i = (a); i &lt;= (b); ++i)
+<p>求树上两点之间出现最多的颜色</p><pre><code class="language-cpp">#define rep(i, a, b) for (int i = (a); i &lt;= (b); ++i)
 #define per(i, a, b) for (int i = (b); i &gt;= (a); ++i)
 #define go(x) for (int i = head[x], tn = e[i].to; i; i = e[i].ne, tn = e[i].to)
 
@@ -1342,8 +1007,6 @@ struct edge {
 };
 
 signed main() {
-    // freopen(&quot;log.txt&quot;, &quot;w&quot;, stderr);
-
     int n;
     scanf(&quot;%lld&quot;, &amp;n);
 
@@ -1427,11 +1090,7 @@ signed main() {
 }
 </code></pre>
 <h3 id="线段树合并">线段树合并</h3>
-<p>给定一棵树，每次操作：给两点之间的所有点的集合加上一个数，或者询问</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-using ll = long long;
-
-struct node {
+<p>给定一棵树，每次操作：给两点之间的所有点的集合加上一个数，或者询问</p><pre><code class="language-cpp">struct node {
     int l, r;
     int val, id;
 
