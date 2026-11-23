@@ -3,7 +3,7 @@
     <title>芋艿酱的小窝</title>
     <link href="https://ckb2008.github.io/feed.xml" rel="self" />
     <link href="https://ckb2008.github.io" />
-    <updated>2026-11-23T17:38:19+08:00</updated>
+    <updated>2026-11-23T23:02:41+08:00</updated>
     <author>
         <name>ckbYuina</name>
     </author>
@@ -219,6 +219,103 @@ int main() {
     else {
         for (int i = 1; i &lt;= n; ++i) {
             printf(&quot;x%d=%.2lf\n&quot;, i, abs(f[i] / a[i][i]) &lt;= eps ? 0 : f[i] / a[i][i]);
+        }
+    }
+    
+    fwrite(obuf, p3 - obuf, 1, stdout);
+    return 0;
+}
+</code></pre>
+<h3 id="矩阵求逆">矩阵求逆</h3>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+#define int ll
+using namespace std;
+using ll = long long;
+
+#define dbg(x...) fprintf(stderr, x);
+
+char buf[1 &lt;&lt; 20], *p1 = buf, *p2 = buf, obuf[1 &lt;&lt; 20], *p3 = obuf;
+#define getc() (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1 &lt;&lt; 20, stdin), p1 == p2) ? EOF : *p1++)
+#define putc(x) (p3 - obuf &lt; (1 &lt;&lt; 20) ? (*p3++ = x) : (fwrite(obuf, p3 - obuf, 1, stdout), p3 = obuf, *p3++=x))
+inline ll read() {
+    ll x = 0, sgn = 0; char s = getc();
+    while(!isdigit(s)) sgn |= s == &#39;-&#39;, s = getc();
+    while(isdigit(s)) x = x * 10 + s - &#39;0&#39;, s = getc();
+    return sgn ? -x : x;
+}
+
+template&lt;typename T&gt; inline void read(T&amp; x) { x = read(); }
+template&lt;typename T, typename... Args&gt; inline void read(T&amp; x, Args&amp;... args) { read(x), read(args...); }
+template&lt;typename T&gt; inline void print(T x) { if (x &lt; 0) x = -x, putc(&#39;-&#39;); if (x &gt;= 10) print(x / 10); putc(x % 10 + &#39;0&#39;); }
+template&lt;typename T, typename... Args&gt; inline void print(char c, T x, Args... args) { print(x), putc(c), print(args...); }
+
+constexpr int N = 407;
+constexpr int mod = 1e9 + 7;
+
+int qinv(int a, int b = mod - 2) {
+    int res = 1;
+    for (; b; b &gt;&gt;= 1) {
+        if (b &amp; 1) {
+            res = res * a % mod;
+        }
+        a = a * a % mod;
+    }
+    return res;
+}
+
+int n, a[N][N &lt;&lt; 1];
+
+signed main() {
+    read(n);
+    for (int i = 1; i &lt;= n; ++i) {
+        for (int j = 1; j &lt;= n; ++j) {
+            read(a[i][j]);
+        }
+        a[i][n + i] = 1;
+    }
+
+    int fl = 1;
+    for (int i = 1; i &lt;= n; ++i) {
+        int p = i;
+        for (int j = i + 1; j &lt;= n; ++j) {
+            if (a[p][i] &lt; a[j][i]) {
+                p = j;
+            }
+        }
+
+        if (p != i) {
+            swap(a[i], a[p]);
+        }
+
+        if (!a[i][i]) {
+            fl = 0;
+            break;
+        }
+        
+        int inv = qinv(a[i][i]);
+        for (int k = 1; k &lt;= n; ++k) {
+            if (i == k) {
+                continue;
+            }
+            int d = a[k][i] * inv % mod;
+            for (int j = i; j &lt;= n * 2; ++j) {
+                a[k][j] = ((a[k][j] - d * a[i][j]) % mod + mod) % mod;
+            }
+        }
+
+        for (int j = 1; j &lt;= n * 2; ++j) {
+            a[i][j] = a[i][j] * inv % mod;
+        }
+    }
+
+    if (!fl) {
+        puts(&quot;No Solution&quot;);
+    } else {
+        for (int i = 1; i &lt;= n; ++i) {
+            for (int j = 1; j &lt;= n; ++j) {
+                print(a[i][n + j]), putc(&#39; &#39;);
+            }
+            putc(&#39;\n&#39;);
         }
     }
     
