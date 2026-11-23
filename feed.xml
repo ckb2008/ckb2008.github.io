@@ -3,7 +3,7 @@
     <title>芋艿酱的小窝</title>
     <link href="https://ckb2008.github.io/feed.xml" rel="self" />
     <link href="https://ckb2008.github.io" />
-    <updated>2026-11-23T02:56:51+08:00</updated>
+    <updated>2026-11-23T08:38:42+08:00</updated>
     <author>
         <name>ckbYuina</name>
     </author>
@@ -30,7 +30,7 @@
             <![CDATA[
                 <blockquote>
 <p><a href="https://ckb2008.github.io/yu-nai-jiang-de-zi-yong-ban-zi/">老模板</a>已经过时，现在是新模板时代~</p></blockquote>
-<h1 id="文件模板">文件模板</h1>
+<h2 id="文件模板">文件模板</h2>
 <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 using ll = long long;
@@ -63,8 +63,8 @@ int main() {
 }
 =
 </code></pre>
-<h1 id="数学">数学</h1>
-<h2 id="高斯消元-1">高斯消元 1</h2>
+<h2 id="数学">数学</h2>
+<h3 id="高斯消元-1">高斯消元 1</h3>
 <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 using ll = long long;
@@ -143,7 +143,7 @@ int main() {
     return 0;
 }
 </code></pre>
-<h2 id="高斯消元-2">高斯消元 2</h2>
+<h3 id="高斯消元-2">高斯消元 2</h3>
 <p><code>fl = 0</code> 无数解，<code>fl = -1</code> 无解。</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 using ll = long long;
@@ -226,14 +226,14 @@ int main() {
     return 0;
 }
 </code></pre>
-<h2 id="二元一次不定方程">二元一次不定方程</h2>
+<h3 id="二元一次不定方程">二元一次不定方程</h3>
 <pre><code class="language-cpp">ll exgcd(ll a, ll b, ll&amp; x, ll&amp; y) {
     if (!b) return x = 1, y = 0, a;
     ll g = exgcd(b, a % b, y, x);
     return y = y - a / b * x, g;
 }
 </code></pre>
-<h2 id="中国剩余定理">中国剩余定理</h2>
+<h3 id="中国剩余定理">中国剩余定理</h3>
 <p>要求模数互质</p><pre><code class="language-cpp">// P1495 【模板】中国剩余定理（CRT）/ 曹冲养猪
 // 125 MB 1000 ms
 
@@ -337,8 +337,8 @@ int main() {
     return 0;
 }
 </code></pre>
-<h1 id="字符串">字符串</h1>
-<h2 id="trie">Trie</h2>
+<h2 id="字符串">字符串</h2>
+<h3 id="trie">Trie</h3>
 <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 
 using ll = long long;
@@ -406,7 +406,7 @@ int main() {
     return 0;
 } 
 </code></pre>
-<h2 id="01trie">01Trie</h2>
+<h3 id="01trie">01Trie</h3>
 <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 #define int ll
 using namespace std;
@@ -539,7 +539,7 @@ auto main()-&gt;int {
     return 0;
 }
 </code></pre>
-<h2 id="manacher">Manacher</h2>
+<h3 id="manacher">Manacher</h3>
 <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 
 using ll = long long;
@@ -576,8 +576,8 @@ int main() {
 }
  
 </code></pre>
-<h1 id="图论">图论</h1>
-<h2 id="spfa-判负环">SPFA 判负环</h2>
+<h2 id="图论">图论</h2>
+<h3 id="spfa-判负环">SPFA 判负环</h3>
 <pre><code class="language-cpp">bool spfa() {
     for (int _ = 1; _ &lt;= n; ++_) {
         bool fl = 0;
@@ -601,7 +601,7 @@ int main() {
     return 1;
 }
 </code></pre>
-<h2 id="tarjan缩点">Tarjan缩点</h2>
+<h3 id="tarjan缩点">Tarjan缩点</h3>
 <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 using ll = long long;
@@ -710,8 +710,8 @@ int main() {
     return 0;
 }
 </code></pre>
-<h1 id="数据结构">数据结构</h1>
-<h2 id="分块">分块</h2>
+<h2 id="数据结构">数据结构</h2>
+<h3 id="分块">分块</h3>
 <pre><code class="language-cpp">int n, m, a[N], pos[N], L[N], R[N];
 ll add[N], sum[N];
 
@@ -756,7 +756,7 @@ ll ask(int l, int r) {
     return ans;
 }
 </code></pre>
-<h2 id="树链剖分">树链剖分</h2>
+<h3 id="树链剖分">树链剖分</h3>
 <p>如果需要边权转点权：<code>a[tn] = w</code> 询问的最后一行改成 <code>query(1, 1, tot, loc[x] + 1, loc[y])</code></p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 #define int ll
 using namespace std;
@@ -908,7 +908,7 @@ signed main() {
     return 0;
 } 
 </code></pre>
-<h2 id="离散二维数点">离散二维数点</h2>
+<h3 id="离散二维数点">离散二维数点</h3>
 <p>求序列的区间 <code>[l, r]</code> 内小于等于 <code>x</code> 的数的个数</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 using ll = long long;
@@ -969,7 +969,7 @@ int main() {
     return 0;
 }
 </code></pre>
-<h2 id="莫队">莫队</h2>
+<h3 id="莫队">莫队</h3>
 <p>区间询问数字出现次数平方和</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 using ll = long long;
@@ -1018,7 +1018,7 @@ int main() {
     return 0;
 }
 </code></pre>
-<h2 id="带修莫队">带修莫队</h2>
+<h3 id="带修莫队">带修莫队</h3>
 <p>单点修改， 询问区间去重后数的个数</p><p>注意块长</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 using ll = long long;
@@ -1110,7 +1110,7 @@ int main() {
     return 0;
 }
 </code></pre>
-<h2 id="dsu-on-tree">DSU on tree</h2>
+<h3 id="dsu-on-tree">DSU on tree</h3>
 <p>求树上两点之间出现最多的颜色</p><pre><code class="language-cpp">// LUOGU_RID: 130257582
 #include &lt;bits/stdc++.h&gt;
 
@@ -1210,7 +1210,7 @@ signed main() {
     return 0;
 }
 </code></pre>
-<h2 id="线段树合并">线段树合并</h2>
+<h3 id="线段树合并">线段树合并</h3>
 <p>给定一棵树，每次操作：给两点之间的所有点的集合加上一个数，或者询问</p><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 using ll = long long;
@@ -1340,8 +1340,8 @@ int main() {
     return 0;
 }
 </code></pre>
-<h1 id="科技">科技</h1>
-<h2 id="集合哈希">集合哈希</h2>
+<h2 id="科技">科技</h2>
+<h3 id="集合哈希">集合哈希</h3>
 <p>ha/hb/hc 表示前 k 个元素组成的集合的哈希值</p><pre><code class="language-cpp">struct randomhash {
      static uint64_t splitmix64(uint64_t x) {
         x += 0x9e3779b97f4a7c15;  
@@ -1402,7 +1402,7 @@ void solve(){
     cout &lt;&lt; cnt &lt;&lt; &#39;\n&#39;;
 }
 </code></pre>
-<h2 id="防卡-unordered_map">防卡 unordered_map</h2>
+<h3 id="防卡-unordered_map">防卡 unordered_map</h3>
 <pre><code class="language-cpp">struct custom_hash {
     static uint64_t splitmix64(uint64_t x) {
         // http://xorshift.di.unimi.it/splitmix64.c
@@ -1421,7 +1421,7 @@ void solve(){
 unordered_map&lt;long long, int, custom_hash&gt; safe_map;
 gp_hash_table&lt;long long, int, custom_hash&gt; safe_hash_table;
 </code></pre>
-<h2 id="区间最远互质点对">区间最远互质点对</h2>
+<h3 id="区间最远互质点对">区间最远互质点对</h3>
 <pre><code class="language-cpp">for (ll len = r - l; len &gt;= 0; --len) 
     for (ll i = l; i &lt;= r - len; ++i)
         if (__gcd(i, i + len) == 1)
