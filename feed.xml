@@ -3,7 +3,7 @@
     <title>芋艿酱的小窝</title>
     <link href="https://ckb2008.github.io/feed.xml" rel="self" />
     <link href="https://ckb2008.github.io" />
-    <updated>2026-11-24T00:46:25+08:00</updated>
+    <updated>2026-11-24T00:48:07+08:00</updated>
     <author>
         <name>ckbYuina</name>
     </author>
@@ -698,7 +698,7 @@ signed main() {
     return 0;
 }
 </code></pre>
-<h2 id="kmp">KMP</h2>
+<h3 id="kmp">KMP</h3>
 <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 
 using ll = long long;
